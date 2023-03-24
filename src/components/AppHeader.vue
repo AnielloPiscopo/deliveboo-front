@@ -1,22 +1,17 @@
 <script>
-import LogoContainer from "./header/LogoContainer.vue";
-import NavMenu from "./header/NavMenu.vue";
+import HeaderNavBar from "./header/NavBar.vue";
 
 export default {
   name: "AppHeader",
 
   components: {
-    LogoContainer,
-    NavMenu,
+    HeaderNavBar,
   },
 };
 </script>
 <template>
   <header>
-    <nav>
-      <LogoContainer />
-      <NavMenu />
-    </nav>
+    <HeaderNavBar />
   </header>
 </template>
 <style lang="scss"></style>
