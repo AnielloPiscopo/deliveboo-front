@@ -1,8 +1,8 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
-import RestaurantsContainer from "../components/main/restaurants/RestaurantsContainer.vue";
-import RestaurantsBtnsContainer from "../components/main/restaurants/BtnsContainer.vue";
+import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
+import RestaurantsBtnsContainer from "../components/main/BtnsContainer.vue";
 
 export default {
   name: "RestaurantsPage",

@@ -1,7 +1,7 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
-import SingleRestaurant from "../components/main/restaurants/SingleRestaurant.vue";
+import SingleRestaurant from "../components/main/SingleRestaurant.vue";
 
 export default {
   name: "SingleRestaurantPage",
