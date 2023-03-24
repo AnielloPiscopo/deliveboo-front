@@ -21,7 +21,7 @@ export default {
   <div class="my_restaurants-container container p-5">
     <div class="row justify-content-center">
       <SingleRestaurant
-        class="col-2 mb-5 mx-3"
+        class="col-5 mb-5 mx-3"
         v-for="(restaurant, index) in restaurants"
         :restaurant="restaurant"
         :key="index"

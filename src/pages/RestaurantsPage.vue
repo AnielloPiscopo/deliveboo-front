@@ -2,14 +2,14 @@
 import { store } from "../store";
 import axios from "axios";
 import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
-import RestaurantsBtnsContainer from "../components/main/BtnsContainer.vue";
+import RestaurantsBtnContainer from "../components/main/BtnContainer.vue";
 
 export default {
   name: "RestaurantsPage",
 
   components: {
     RestaurantsContainer,
-    RestaurantsBtnsContainer,
+    RestaurantsBtnContainer,
   },
 
   data() {
@@ -17,6 +17,8 @@ export default {
       store,
       restaurantsList: [],
       typesList: [],
+      totalRestaurants: null,
+      numOfRestaurantsInPage: null,
       currentPage: 1,
       numOfPages: null,
       apiUrlSpecificSection: "restaurants",
@@ -32,23 +34,24 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data.results);
-          this.restaurantsList = response.data.results.restaurants.data;
+          console.log(response.data.results.restaurants.data);
+          this.totalRestaurants = response.data.results.restaurants.total;
+          this.numOfRestaurantsInPage +=
+            response.data.results.restaurants.per_page;
+          this.restaurantsList = this.restaurantsList.concat(
+            response.data.results.restaurants.data
+          );
           this.typesList = response.data.results.types.data;
           this.numOfPages = response.data.results.restaurants.last_page;
         });
     },
 
-    previousPage() {
-      this.currentPage =
-        this.currentPage <= 1 ? this.numOfPages : this.currentPage - 1;
-      this.getRestaurantsInfo();
-    },
-
-    nextPage() {
-      this.currentPage =
-        this.currentPage >= this.numOfPages ? 1 : this.currentPage + 1;
-      this.getRestaurantsInfo();
+    getMoreRestaurants() {
+      if (this.totalRestaurants > this.numOfRestaurantsInPage) {
+        this.currentPage =
+          this.currentPage >= this.numOfPages ? 1 : this.currentPage + 1;
+        this.getRestaurantsInfo();
+      }
     },
   },
 
@@ -61,7 +64,7 @@ export default {
 <template>
   <section id="home" class="container p-5" v-if="restaurantsList.length != 0">
     <RestaurantsContainer :restaurants="restaurantsList" />
-    <RestaurantsBtnsContainer @prev="previousPage()" @next="nextPage()" />
+    <RestaurantsBtnContainer @view-more="getMoreRestaurants()" />
   </section>
 </template>
 
