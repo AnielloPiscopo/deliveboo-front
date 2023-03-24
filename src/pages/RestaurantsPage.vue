@@ -35,7 +35,7 @@ export default {
           console.log(response.data.results);
           this.restaurantsList = response.data.results.restaurants.data;
           this.typesList = response.data.results.types.data;
-          this.numOfPages = response.data.results.last_page;
+          this.numOfPages = response.data.results.restaurants.last_page;
         });
     },
 
