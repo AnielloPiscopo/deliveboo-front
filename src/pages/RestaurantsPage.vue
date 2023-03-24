@@ -3,6 +3,7 @@ import { store } from "../store";
 import axios from "axios";
 import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
 import RestaurantsBtnsContainer from "../components/main/BtnsContainer.vue";
+import TypesCuisine from "../components/main/TypesCuisine.vue";
 
 export default {
   name: "RestaurantsPage",
@@ -10,6 +11,7 @@ export default {
   components: {
     RestaurantsContainer,
     RestaurantsBtnsContainer,
+    TypesCuisine,
   },
 
   data() {
@@ -34,8 +36,9 @@ export default {
         .then((response) => {
           console.log(response.data.results);
           this.restaurantsList = response.data.results.restaurants.data;
-          this.typesList = response.data.results.types.data;
+          this.typesList = response.data.results.types;
           this.numOfPages = response.data.results.last_page;
+          console.log(this.typesList);
         });
     },
 
@@ -60,6 +63,7 @@ export default {
 
 <template>
   <section id="home" class="container p-5" v-if="restaurantsList.length != 0">
+    <TypesCuisine :types="typesList" />
     <RestaurantsContainer :restaurants="restaurantsList" />
     <RestaurantsBtnsContainer @prev="previousPage()" @next="nextPage()" />
   </section>
