@@ -2,7 +2,7 @@
 import { store } from "../store";
 import axios from "axios";
 import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
-import RestaurantsBtnsContainer from "../components/main/BtnsContainer.vue";
+import RestaurantsBtnContainer from "../components/main/BtnContainer.vue";
 import TypesCuisine from "../components/main/TypesCuisine.vue";
 
 export default {
@@ -10,7 +10,7 @@ export default {
 
   components: {
     RestaurantsContainer,
-    RestaurantsBtnsContainer,
+    RestaurantsBtnContainer,
     TypesCuisine,
   },
 
