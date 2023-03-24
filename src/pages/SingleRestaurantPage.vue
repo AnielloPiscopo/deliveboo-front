@@ -2,12 +2,14 @@
 import { store } from "../store";
 import axios from "axios";
 import SingleRestaurant from "../components/main/SingleRestaurant.vue";
+import AppCategories from "../components/main/AppCategories.vue";
 
 export default {
   name: "SingleRestaurantPage",
 
   components: {
     SingleRestaurant,
+    AppCategories
   },
 
   data() {
@@ -24,8 +26,8 @@ export default {
       axios
         .get(
           this.store.apiUrl +
-            this.apiUrlSpecificSection +
-            `/${this.$route.params.slug}`,
+          this.apiUrlSpecificSection +
+          `/${this.$route.params.slug}`,
           {
             params: {},
           }
@@ -46,6 +48,7 @@ export default {
 
 <template>
   <section id="single-restaurant">
+    <AppCategories :categories="categories" />
     <SingleRestaurant :restaurant="restaurant" :isShow="true" />
   </section>
 </template>
