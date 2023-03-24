@@ -43,7 +43,7 @@ export default {
           this.restaurantsList = this.restaurantsList.concat(
             response.data.results.restaurants.data
           );
-          this.typesList = response.data.results.types.data;
+          this.typesList = response.data.results.types;
           this.numOfPages = response.data.results.restaurants.last_page;
         });
     },
