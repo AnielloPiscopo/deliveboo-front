@@ -57,11 +57,7 @@ export default {
 </script>
 
 <template>
-  <section
-    id="restaurants"
-    class="container p-5"
-    v-if="restaurantsList.length != 0"
-  >
+  <section id="home" class="container p-5" v-if="restaurantsList.length != 0">
     <RestaurantsContainer :restaurants="restaurantsList" />
     <RestaurantsBtnsContainer @prev="previousPage()" @next="nextPage()" />
   </section>

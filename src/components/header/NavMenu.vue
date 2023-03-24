@@ -6,12 +6,6 @@ export default {
     return {
       navLinks: [
         {
-          name: "home",
-          text: "Home",
-          icon: ["fas", "fa-home"],
-        },
-
-        {
           name: "restaurants",
           text: "Lista Ristoranti",
           icon: ["fas", "utensils"],
