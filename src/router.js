@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: "/restaurants",
       name: "restaurants",
-      component: Restaurants,
+      component: RestaurantsPage,
     },
 
     {
