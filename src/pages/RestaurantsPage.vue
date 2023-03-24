@@ -16,6 +16,7 @@ export default {
     return {
       store,
       restaurantsList: [],
+      typesList: [],
       currentPage: 1,
       numOfPages: null,
       apiUrlSpecificSection: "restaurants",
@@ -31,8 +32,9 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data.results.last_page);
-          this.restaurantsList = response.data.results.data;
+          console.log(response.data.results);
+          this.restaurantsList = response.data.results.restaurants.data;
+          this.typesList = response.data.results.types.data;
           this.numOfPages = response.data.results.last_page;
         });
     },

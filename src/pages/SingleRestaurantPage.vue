@@ -14,6 +14,7 @@ export default {
     return {
       store,
       restaurant: null,
+      categories: [],
       apiUrlSpecificSection: "restaurants",
     };
   },
@@ -26,14 +27,13 @@ export default {
             this.apiUrlSpecificSection +
             `/${this.$route.params.slug}`,
           {
-            params: {
-              api_token: this.store.apiToken,
-            },
+            params: {},
           }
         )
         .then((response) => {
           console.log(response.data.results);
-          this.restaurant = response.data.results;
+          this.restaurant = response.data.results.restaurant;
+          this.categories = response.data.results.categories;
         });
     },
   },
