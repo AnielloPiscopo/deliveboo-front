@@ -2,14 +2,16 @@
 import { store } from "../store";
 import axios from "axios";
 import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
-import RestaurantsBtnContainer from "../components/main/BtnContainer.vue";
+import RestaurantsBtnsContainer from "../components/main/BtnsContainer.vue";
+import TypesCuisine from "../components/main/TypesCuisine.vue";
 
 export default {
   name: "RestaurantsPage",
 
   components: {
     RestaurantsContainer,
-    RestaurantsBtnContainer,
+    RestaurantsBtnsContainer,
+    TypesCuisine,
   },
 
   data() {
@@ -63,6 +65,7 @@ export default {
 
 <template>
   <section id="home" class="container p-5" v-if="restaurantsList.length != 0">
+    <TypesCuisine :types="typesList" />
     <RestaurantsContainer :restaurants="restaurantsList" />
     <RestaurantsBtnContainer @view-more="getMoreRestaurants()" />
   </section>
