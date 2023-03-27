@@ -13,10 +13,8 @@ export default {
 </script>
 
 <template>
-  <nav>
     <LogoContainer />
     <NavMenu />
-  </nav>
 </template>
 
 <style lang="scss" scoped></style>

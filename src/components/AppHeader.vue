@@ -14,4 +14,15 @@ export default {
     <HeaderNavBar />
   </header>
 </template>
-<style lang="scss"></style>
+<style lang="scss">
+
+header {
+    height: 65px;
+    padding: 1rem;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+</style>
