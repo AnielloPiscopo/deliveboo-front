@@ -22,9 +22,6 @@ export default {
     <section class="my-categories">
         <h4 v-for="(category) in categories">
             {{ category.title }}
-            <span>
-                ({{ category.title.length }})
-            </span>
         </h4>
     </section>
 </template>
