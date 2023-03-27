@@ -8,7 +8,6 @@ export default {
   data() {
     return {
       store,
-      dishesList: [],
     };
   },
 
@@ -26,11 +25,11 @@ export default {
   },
 
   mounted() {
-    if (localStorage.getItem("dishesList")) {
+    if (localStorage.getItem("cart")) {
       try {
-        this.dishesList = JSON.parse(localStorage.getItem("dishesList"));
+        this.store.cart = JSON.parse(localStorage.getItem("cart"));
       } catch (e) {
-        localStorage.removeItem("dishesList");
+        localStorage.removeItem("cart");
       }
     }
 
@@ -43,18 +42,19 @@ export default {
     addToCart(product) {
       console.log(product);
 
-      this.dishesList.push(product);
+      this.store.cart.push(product);
       this.store.cartCount++;
-      this.savedishesList();
+      console.log(store);
+      this.saveCart();
     },
     removeDish(x) {
-      this.dishesList.splice(x, 1);
+      this.cart.splice(x, 1);
       this.saveCats();
     },
-    savedishesList() {
-      const parsed = JSON.stringify(this.dishesList);
+    saveCart() {
+      const parsed = JSON.stringify(this.store.cart);
       const parsedCount = JSON.stringify(this.store.cartCount);
-      localStorage.setItem("dishesList", parsed);
+      localStorage.setItem("cart", parsed);
       localStorage.setItem("cartCount", parsedCount);
     },
   },
@@ -74,7 +74,9 @@ export default {
     />
     <div class="card-body">
       <h5 class="card-title">{{ dish.name }}</h5>
-      <a class="my-btn cursor-pointer btn btn-primary" @click="addToCart(dish)"
+      <a
+        class="my-btn cursor-pointer btn btn-primary"
+        @click="addToCart(dish.name)"
         >Aggiungi al carrello</a
       >
     </div>
