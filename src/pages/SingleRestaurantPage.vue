@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       store,
-      restaurant: null,
+      restaurant: [],
       categories: [],
       apiUrlSpecificSection: "restaurants",
     };
