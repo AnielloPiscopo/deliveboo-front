@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       store,
-      cart: store.cart,
+      dishesList: [],
     };
   },
 
@@ -25,29 +25,37 @@ export default {
     },
   },
 
-  methods: {
-    addToCart(dish) {
-      console.log(this.store.cart);
-      this.store.cart.push(dish);
-      this.store.cartCount++;
-      // localStorage.setItem(this.store.cart, JSON.stringify(this.store.cart));
-      // localStorage.setItem(
-      //   this.store.cartCount,
-      //   JSON.stringify(this.store.cartCount)
-      // );
-      console.log(this.store.cart);
-    },
-  },
-
   mounted() {
-    this.store.cart = JSON.parse(localStorage.getItem(this.store.cart)) || [];
+    if (localStorage.getItem("dishesList")) {
+      try {
+        this.dishesList = JSON.parse(localStorage.getItem("dishesList"));
+      } catch (e) {
+        localStorage.removeItem("dishesList");
+      }
+    }
+
+    if (localStorage.cartCount) {
+      this.store.cartCount = JSON.parse(localStorage.cartCount);
+    }
   },
 
-  watch: {
-    cart: {
-      handler() {
-        localStorage.setItem("cart", JSON.stringify(cart));
-      },
+  methods: {
+    addToCart(product) {
+      console.log(product);
+
+      this.dishesList.push(product);
+      this.store.cartCount++;
+      this.savedishesList();
+    },
+    removeDish(x) {
+      this.dishesList.splice(x, 1);
+      this.saveCats();
+    },
+    savedishesList() {
+      const parsed = JSON.stringify(this.dishesList);
+      const parsedCount = JSON.stringify(this.store.cartCount);
+      localStorage.setItem("dishesList", parsed);
+      localStorage.setItem("cartCount", parsedCount);
     },
   },
 };
