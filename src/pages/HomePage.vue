@@ -19,18 +19,17 @@ export default {
       store,
       restaurantsList: [],
       typesList: [],
-      totalRestaurants: null,
-      numOfRestaurantsInPage: null,
+      totalRestaurants: [],
+      numOfRestaurantsInPage: 0,
       currentPage: 1,
-      numOfPages: null,
-      apiUrlSpecificSection: "restaurants",
+      numOfPages: 0,
     };
   },
 
   methods: {
     getRestaurantsInfo() {
       axios
-        .get(this.store.apiUrl + this.apiUrlSpecificSection, {
+        .get(this.store.apiUrl + 'restaurants', {
           params: {
             page: this.currentPage,
           },
