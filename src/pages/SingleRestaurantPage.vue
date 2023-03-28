@@ -3,12 +3,14 @@ import { store } from "../store";
 import axios from "axios";
 import SingleRestaurant from "../components/main/SingleRestaurant.vue";
 import DishesContainer from "../components/main/DishesContainer.vue";
+import AppCategories from "../components/main/AppCategories.vue";
 
 export default {
   name: "SingleRestaurantPage",
 
   components: {
     SingleRestaurant,
+    AppCategories,
     DishesContainer,
   },
 
@@ -50,6 +52,7 @@ export default {
 
 <template>
   <section id="single-restaurant">
+    <AppCategories :categories="categories" />
     <SingleRestaurant :restaurant="restaurant" :isShow="true" />
     <DishesContainer :dishes="dishes" />
   </section>

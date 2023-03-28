@@ -2,10 +2,11 @@
 import { store } from "../../store";
 export default {
     name: 'TypesCuisine',
-
+    emits: ['filtered'],
     data() {
         return {
             store,
+            restaurants: [],
         }
     },
 
@@ -15,10 +16,10 @@ export default {
             required: true,
         },
     },
-    created() {
-        console.log(this.types)
-    },
 
+    methods: {
+
+    },
 }
 
 </script>
@@ -26,15 +27,17 @@ export default {
 <template>
     <div class="d-flex justify-content-around">
         <div class="my-box my-border" v-for="(type) in types">
-            <div class="box-image my-border">
-                <img :src="type.img_path" :alt="type.title">
-            </div>
+            <!-- <div class="box-image my-border">
+                                                                                                                                                                                <img :src="type.img_path" :alt="type.title">
+                                                                                                                                                                            </div> -->
+            <input type="checkbox" :value="type.title" v-model="store.selectedTypes">
             <div class="box-title">
-                <h5 class="m-0">
-                    {{ type.title }}
-                </h5>
+                <h5 class="m-0"> {{ type.title }} </h5>
             </div>
         </div>
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary" @click="$emit('filtered', store.selectedTypes)">Cerca</button>
     </div>
 </template>
 

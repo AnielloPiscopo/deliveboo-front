@@ -1,7 +1,78 @@
-a {
+@use "../styles/partials/variables" as *;
+
+a{
   text-decoration: none;
+  color: inherit;
 }
 
-ul {
-  list-style: none;
+a:hover{
+  color: white;
+}
+
+
+
+button.button-header {
+  background-color: white;
+  border: none;
+  padding: .6rem;
+  margin-left: .2rem;
+  margin-right: .2rem;
+  border-radius: 5px;
+  color: rgb(92, 201, 188);
+  font-weight: bold;
+}
+
+
+.button {
+  padding: 8px 16px;
+  background-color: transparent;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .5s;
+  font-weight: 400;
+  font-size: .8rem;
+  border: 1px solid;
+  font-family: inherit;
+  color: $Main-Color;
+  z-index: 1;
+}
+
+.button::before,
+.button::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: $Main-Color;
+  transition: 1s ease;
+}
+
+.button::before {
+  top: -1.5em;
+  left: -1.5em;
+}
+
+.button::after {
+  left: calc(100% + 1.5em);
+  top: calc(100% + 1.5em);
+}
+
+.button:hover::before,
+.button:hover::after {
+  height: 410px;
+  width: 410px;
+}
+
+.button:hover {
+  color: rgb(255, 255, 255);
+}
+
+.button:active {
+  filter: brightness(.8);
 }
