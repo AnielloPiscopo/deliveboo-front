@@ -1,6 +1,7 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
+import Swal from 'sweetalert2'
 import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
 import RestaurantsBtnContainer from "../components/main/BtnContainer.vue";
 import TypesCuisine from "../components/main/TypesCuisine.vue";
@@ -38,9 +39,17 @@ export default {
           this.store.restaurants = response.data.results.restaurants.data;
         }).catch((error) => {
           console.error('Error fetching restaurants:', error);
-          alert('Error fetching restaurants. Please try again later.');
-          this.store.restaurants = [];
-          this.getRestaurantsInfo();
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            showConfirmButton: false,
+            timer: 1500,
+            text: 'La tua ricerca non ha prodotto risultati!',
+          })
+          setTimeout(() => {
+            this.store.restaurants = [];
+            this.getRestaurantsInfo();
+          }, 1500);
         });
     },
     getRestaurantsInfo() {
