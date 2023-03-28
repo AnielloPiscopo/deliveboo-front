@@ -18,7 +18,7 @@ export default {
 
     <div v-if="store.cart.length > 0" class="navbar-dropdown is-boxed is-right">
       <a v-for="item in store.cart" :key="item.id" class="navbar-item" href="">
-        {{ item.title }} x{{ item.quantity }} - ${{ item.totalPrice }}
+        {{ item }} x{{ item.quantity }}
       </a>
 
       <a class="navbar-item" href=""> Total: ${{ totalPrice }} </a>

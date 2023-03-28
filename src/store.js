@@ -7,10 +7,31 @@ export const store = reactive({
   selectedTypes: [],
   cart: [],
   cartCount: 0,
+
   getFilePath(fileFolder, filePath, fileExtension) {
     return new URL(
       "./assets/" + fileFolder + "/" + filePath + "." + fileExtension,
       import.meta.url
     ).href;
+  },
+
+  addToCart(product) {
+    console.log(product);
+
+    this.cart.push(product);
+    this.cartCount++;
+    this.saveCart();
+  },
+
+  removeDish(x) {
+    this.cart.splice(x, 1);
+    this.saveCats();
+  },
+
+  saveCart() {
+    const parsed = JSON.stringify(this.cart);
+    const parsedCount = JSON.stringify(this.cartCount);
+    localStorage.setItem("cart", parsed);
+    localStorage.setItem("cartCount", parsedCount);
   },
 });

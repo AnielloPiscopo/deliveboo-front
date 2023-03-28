@@ -31,7 +31,7 @@ export default {
       </div>
     </div>
 
-    <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <!-- <div id="navbarExampleTransparentExample" class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable">
           <router-link class="navbar-link" :to="{ name: 'cart' }">
@@ -47,7 +47,7 @@ export default {
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </nav>
 </template>
 
