@@ -61,7 +61,7 @@ export default {
       <h5 class="card-title">{{ dish.name }}</h5>
       <a
         class="my-btn cursor-pointer btn btn-primary"
-        @click="store.addToCart(dish.name)"
+        @click="store.addToCart(dish)"
         >Aggiungi al carrello</a
       >
     </div>

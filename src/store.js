@@ -34,4 +34,14 @@ export const store = reactive({
     localStorage.setItem("cart", parsed);
     localStorage.setItem("cartCount", parsedCount);
   },
+
+  imgControl(img) {
+    if (img && img.includes("imgs//")) {
+      return this.imgUrl + img;
+    } else if (img && !img.includes("imgs//")) {
+      return this.img_path;
+    } else {
+      return "https://images-ext-1.discordapp.net/external/vgbhoJsJh8O-0yTSXYwtXZSPBKRTJqEKISl7nFl4h-k/https/www.lagodigarda.com/getimg/ristoranti/800/default%288%29.jpg?width=993&height=662";
+    }
+  },
 });
