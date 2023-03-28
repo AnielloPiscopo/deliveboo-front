@@ -17,7 +17,6 @@ export default {
   data() {
     return {
       store,
-      restaurants: [],
       typesList: [],
       totalRestaurants: [],
       numOfRestaurantsInPage: 0,
@@ -36,15 +35,14 @@ export default {
         })
         .then((response) => {
           console.log(response.data.results.restaurants.data);
-          this.restaurants = response.data.results.restaurants.data;
+          this.store.restaurants = response.data.results.restaurants.data;
         });
     },
-    getRestaurantsInfo(filteredTypes = []) {
+    getRestaurantsInfo() {
       axios
         .get(this.store.apiUrl + 'restaurants', {
           params: {
             page: this.currentPage,
-            type: filteredTypes,
           },
         })
         .then((response) => {
@@ -52,7 +50,7 @@ export default {
           this.totalRestaurants = response.data.results.restaurants.total;
           this.numOfRestaurantsInPage +=
             response.data.results.restaurants.per_page;
-          this.restaurants = this.restaurants.concat(
+          this.store.restaurants = this.store.restaurants.concat(
             response.data.results.restaurants.data
           );
           this.typesList = response.data.results.types;
@@ -76,9 +74,9 @@ export default {
 </script>
 
 <template>
-  <section id="home" class="container p-5" v-if="restaurants.length != 0">
+  <section id="home" class="container p-5" v-if="store.restaurants.length != 0">
     <TypesCuisine :types="typesList" @filtered="getFilteredRestaurants" />
-    <RestaurantsContainer :restaurants="restaurants" />
+    <RestaurantsContainer />
     <RestaurantsBtnContainer @view-more="getMoreRestaurants()" />
   </section>
 </template>

@@ -2,7 +2,7 @@
 import { store } from "../../store";
 export default {
     name: 'TypesCuisine',
-
+    emits: ['filtered'],
     data() {
         return {
             store,
@@ -29,8 +29,8 @@ export default {
     <div class="d-flex justify-content-around">
         <div class="my-box my-border" v-for="(type) in types">
             <!-- <div class="box-image my-border">
-                                                                                                                                                                <img :src="type.img_path" :alt="type.title">
-                                                                                                                                                            </div> -->
+                                                                                                                                                                    <img :src="type.img_path" :alt="type.title">
+                                                                                                                                                                </div> -->
             <input type="checkbox" :value="type.title" v-model="selectedTypes">
             <div class="box-title">
                 <h5 class="m-0"> {{ type.title }} </h5>
