@@ -1,31 +1,24 @@
 <script>
 import SingleRestaurant from "./SingleRestaurant.vue";
-
+import { store } from "../../store";
 export default {
   name: "RestaurantsContainer",
+  data() {
+    return {
+      store,
+    }
+  },
 
   components: {
     SingleRestaurant,
-  },
-
-  props: {
-    restaurants: {
-      type: Array,
-      required: true,
-    },
   },
 };
 </script>
 
 <template>
   <div class="my_restaurants-container container p-5">
-    <div class="row justify-content-center">
-      <SingleRestaurant
-        class="col-5 mb-5 mx-3"
-        v-for="(restaurant, index) in restaurants"
-        :restaurant="restaurant"
-        :key="index"
-      />
+    <div class="row justify-content-center g-3">
+      <SingleRestaurant v-for="(restaurant, index) in store.restaurants" :key="index" :restaurant="restaurant" />
     </div>
   </div>
 </template>

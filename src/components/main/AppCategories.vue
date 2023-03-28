@@ -20,9 +20,7 @@ export default {
 
 <template>
     <section class="my-categories">
-        <h4 v-for="(category) in categories">
-            {{ category.title }}
-        </h4>
+        <h4 v-for="(category) in categories" class="d-inline-block px-1"> {{ category.title }} </h4>
     </section>
 </template>
 
