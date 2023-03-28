@@ -15,22 +15,25 @@ export default {
             required: true,
         },
     },
+
+    methods: {
+    },
 }
 
 </script>
 
 <template>
     <div class="d-flex justify-content-around">
-        <div class="my-box my-border" v-for="(type) in types">
-            <div class="box-image my-border">
-                <img :src="type.img_path" :alt="type.title">
-            </div>
+        <div class="my-box my-border" v-for="(type) in types" @click="$emit('filteredSearch', [type.title])">
+            <!-- <div class="box-image my-border">
+                                                                <img :src="type.img_path" :alt="type.title">
+                                                            </div> -->
+            <input type="checkbox" :value="type.title">
             <div class="box-title">
-                <h5 class="m-0">
-                    {{ type.title }}
-                </h5>
+                <h5 class="m-0"> {{ type.title }} </h5>
             </div>
         </div>
+        <button type="button"></button>
     </div>
 </template>
 

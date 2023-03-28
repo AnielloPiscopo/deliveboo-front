@@ -27,11 +27,12 @@ export default {
   },
 
   methods: {
-    getRestaurantsInfo() {
+    getRestaurantsInfo(filteredTypes = []) {
       axios
         .get(this.store.apiUrl + 'restaurants', {
           params: {
             page: this.currentPage,
+            type: filteredTypes,
           },
         })
         .then((response) => {
@@ -64,7 +65,7 @@ export default {
 
 <template>
   <section id="home" class="container p-5" v-if="restaurantsList.length != 0">
-    <TypesCuisine :types="typesList" />
+    <TypesCuisine :types="typesList" @filteredSearch="getRestaurantsInfo" />
     <RestaurantsContainer :restaurants="restaurantsList" />
     <RestaurantsBtnContainer @view-more="getMoreRestaurants()" />
   </section>

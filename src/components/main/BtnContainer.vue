@@ -6,9 +6,7 @@ export default {
 
 <template>
   <div class="my_btns-container d-flex justify-content-around pt-4">
-    <a href="#" class="my_btn btn btn-primary" @click="$emit('view-more')"
-      >Vedi altro</a
-    >
+    <a class="my_btn btn btn-primary" @click="$emit('view-more')">Vedi altro</a>
   </div>
 </template>
 
