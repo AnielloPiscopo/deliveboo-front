@@ -36,6 +36,11 @@ export default {
         .then((response) => {
           console.log(response.data.results.restaurants.data);
           this.store.restaurants = response.data.results.restaurants.data;
+        }).catch((error) => {
+          console.error('Error fetching restaurants:', error);
+          alert('Error fetching restaurants. Please try again later.');
+          this.store.restaurants = [];
+          this.getRestaurantsInfo();
         });
     },
     getRestaurantsInfo() {
