@@ -16,9 +16,9 @@ export default {
   <div class="container-fluid px-lg-5 m-0">
     <div class="row h-100">
       <div class="col-6 logo p-0 h-100">
-        <a href="http://localhost:5179/">
+        <router-link :to="{ name: 'restaurants' }">
           <img class="h-100" :src="store.getFilePath('imgs', 'logo_deliveboo', 'svg')" alt="" />
-        </a>
+        </router-link>
       </div>
     </div>
   </div>

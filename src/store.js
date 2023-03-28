@@ -7,6 +7,7 @@ export const store = reactive({
   selectedTypes: [],
   cart: [],
   cartCount: 0,
+  //dishCount: 0,
 
   getFilePath(fileFolder, filePath, fileExtension) {
     return new URL(
@@ -15,18 +16,23 @@ export const store = reactive({
     ).href;
   },
 
-  addToCart(product) {
-    console.log(product);
+  // addToCart(product) {
+  //   console.log(product);
 
-    this.cart.push(product);
-    this.cartCount++;
-    this.saveCart();
-  },
+  //   if (this.cart.includes(product)) {
+  //     this.dishCount++;
+  //   } else {
+  //     this.cart.push(product);
+  //   }
+  //   this.cartCount++;
+  //   this.saveCart();
+  // },
 
-  removeDish(x) {
-    this.cart.splice(x, 1);
-    this.saveCats();
-  },
+  // removeDish(x) {
+  //   this.cart.splice(x, 1);
+  //   this.cartCount--;
+  //   this.saveCart();
+  // },
 
   saveCart() {
     const parsed = JSON.stringify(this.cart);
@@ -39,7 +45,7 @@ export const store = reactive({
     if (img && img.includes("imgs//")) {
       return this.imgUrl + img;
     } else if (img && !img.includes("imgs//")) {
-      return this.img_path;
+      return img;
     } else {
       return "https://images-ext-1.discordapp.net/external/vgbhoJsJh8O-0yTSXYwtXZSPBKRTJqEKISl7nFl4h-k/https/www.lagodigarda.com/getimg/ristoranti/800/default%288%29.jpg?width=993&height=662";
     }

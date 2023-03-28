@@ -29,8 +29,8 @@ export default {
       axios
         .get(
           this.store.apiUrl +
-            this.apiUrlSpecificSection +
-            `/${this.$route.params.slug}`,
+          this.apiUrlSpecificSection +
+          `/${this.$route.params.slug}`,
           {
             params: {},
           }

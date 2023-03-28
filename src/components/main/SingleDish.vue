@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       store,
+      dishCount: 0,
     };
   },
 
@@ -25,13 +26,13 @@ export default {
   },
 
   methods: {
-    // addToCart(product) {
-    //   console.log(product);
-    //   this.store.cart.push(product);
-    //   this.store.cartCount++;
-    //   console.log(store);
-    //   this.saveCart();
-    // },
+    addToCart(product) {
+      console.log(product);
+      this.store.cart.push(product);
+      this.store.cartCount++;
+      this.store.saveCart();
+    },
+
     // removeDish(x) {
     //   this.cart.splice(x, 1);
     //   this.saveCats();
@@ -48,22 +49,10 @@ export default {
 
 <template>
   <article class="card">
-    <img
-      class="card-img-top img-fluid"
-      :src="
-        dish.img_path
-          ? dish.img_path
-          : 'https://images-ext-1.discordapp.net/external/vgbhoJsJh8O-0yTSXYwtXZSPBKRTJqEKISl7nFl4h-k/https/www.lagodigarda.com/getimg/ristoranti/800/default%288%29.jpg?width=993&height=662'
-      "
-      :alt="dish.img_path"
-    />
+    <img class="card-img-top img-fluid" :src="store.imgControl(dish.img_path)" :alt="dish.img_path" />
     <div class="card-body">
       <h5 class="card-title">{{ dish.name }}</h5>
-      <a
-        class="my-btn cursor-pointer btn btn-primary"
-        @click="store.addToCart(dish)"
-        >Aggiungi al carrello</a
-      >
+      <a class="my-btn cursor-pointer btn btn-primary" @click="addToCart(dish)">Aggiungi al carrello</a>
     </div>
   </article>
 </template>
