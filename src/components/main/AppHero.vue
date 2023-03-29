@@ -55,11 +55,9 @@ section.jumbo {
 div.text {
     text-align: center;
     color: white;
-    /* width: 50%;
-    left: 50%;
-    transform: translate(-50%); */
-    padding: 10px;
-    padding-top: 300px;
+    font-size: 20px;
+    padding: 20px;
+    padding-top: 400px;
 }
 
 
