@@ -13,6 +13,10 @@ export default {
       type: Array,
       required: true,
     },
+    restaurantId: {
+      type: Number,
+      required: false,
+    }
   },
 };
 </script>
@@ -20,7 +24,7 @@ export default {
 <template>
   <div class="my_dishes-container container p-5">
     <div class="row">
-      <SingleDish v-for="(dish, index) in dishes" :dish="dish" :key="index" />
+      <SingleDish v-for="(dish, index) in dishes" :dish="dish" :restaurantId="restaurantId" :key="index" />
     </div>
   </div>
 </template>

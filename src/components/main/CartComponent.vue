@@ -18,22 +18,31 @@ export default {
       this.store.saveCart();
     },
 
-    getNumberOfCopiesInList(list, element) {
-      let dishCount = 0;
-      if (list.includes(element)) {
-        const filteredList = list.filter(listEl => listEl = element);
-        for (let i = 0; i < filteredList.length; i++) {
-          dishCount = dishCount + 1;
-        }
-      }
-      return dishCount;
+    removeDishToCart(item) {
+      // controllo se nel carrello c'è già il piatto.
+      //Se il piatto è presente non lo pusho nel carrello ma gli dimiuisco solo la quantità
+      //salvo nel local storage
+      //Altrimenti Faccio lo splice dal carrello
+      //salvo il carrello.
     },
-
-    areMoreThanOneControl(list, element) {
-      return list.includes(element)
+    addQuantity(ItemDelCarrello) {
+      ItemDelCarrello.quantity++;
+    },
+    decreaseQuantity(ItemDelCarrello) {
+      if (ItemDelCarrello.quantity > 1) {
+        ItemDelCarrello--;
+      }
+    },
+    clearCart() {
+      localStorage.clear();
+      this.store.cart = [];
     }
   },
-
+  computed: {
+    totalPrice() {
+      return this.store.cart.reduce((a, b) => a + b.price * b.quantity, 0);
+    }
+  }
 };
 </script>
 
@@ -50,13 +59,9 @@ export default {
       </div>
       <div class="col-6">
         <span>{{ item.name }} - {{ getNumberOfCopiesInList(store.cart, item) }}</span>
-        <button @click="removeDish(0)">
-          Rimuovi
-        </button>
+        <button @click="removeDish(0)"> Rimuovi </button>
       </div>
-      <div class="col-12">
-        {{ }}
-      </div>
+      <div class="col-12"> {{ }} </div>
       <div class="col-3">{{ item.price }}&euro;</div>
     </div>
   </div>

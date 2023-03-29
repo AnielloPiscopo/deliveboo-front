@@ -6,8 +6,6 @@ export const store = reactive({
   restaurants: [],
   selectedTypes: [],
   cart: [],
-  cartCount: 0,
-  //dishCount: 0,
 
   getFilePath(fileFolder, filePath, fileExtension) {
     return new URL(
@@ -36,9 +34,8 @@ export const store = reactive({
 
   saveCart() {
     const parsed = JSON.stringify(this.cart);
-    const parsedCount = JSON.stringify(this.cartCount);
     localStorage.setItem("cart", parsed);
-    localStorage.setItem("cartCount", parsedCount);
+
   },
 
   imgControl(img) {

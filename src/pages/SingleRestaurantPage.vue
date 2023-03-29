@@ -54,7 +54,7 @@ export default {
   <section id="single-restaurant">
     <AppCategories :categories="categories" />
     <SingleRestaurant :restaurant="restaurant" :isShow="true" />
-    <DishesContainer :dishes="dishes" />
+    <DishesContainer :dishes="dishes" :restaurantId="restaurant.id" />
   </section>
 </template>
 
