@@ -1,5 +1,4 @@
 <script>
-import HeaderNavBar from "./header/NavBar.vue";
 import HeaderLogoContainer from "./header/LogoContainer.vue";
 import HeaderNavMenu from "./header/NavMenu.vue";
 
@@ -8,7 +7,6 @@ export default {
 
   components: {
     HeaderLogoContainer,
-    HeaderNavBar,
     HeaderNavMenu,
   },
 };
@@ -16,7 +14,6 @@ export default {
 <template>
   <header>
     <HeaderLogoContainer />
-    <HeaderNavBar />
     <HeaderNavMenu />
   </header>
 </template>
