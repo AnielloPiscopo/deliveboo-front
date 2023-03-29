@@ -1,9 +1,8 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
-import RestaurantsBtnContainer from "../components/main/BtnContainer.vue";
 import TypesCuisine from "../components/main/TypesCuisine.vue";
 
 export default {
@@ -11,7 +10,6 @@ export default {
 
   components: {
     RestaurantsContainer,
-    RestaurantsBtnContainer,
     TypesCuisine,
   },
 
@@ -19,17 +17,13 @@ export default {
     return {
       store,
       typesList: [],
-      totalRestaurants: [],
-      numOfRestaurantsInPage: 0,
-      currentPage: 1,
-      numOfPages: 0,
     };
   },
 
   methods: {
     getRestaurantsInfo(filter) {
       axios
-        .get(this.store.apiUrl + 'restaurants', {
+        .get(this.store.apiUrl + "restaurants", {
           params: {
             type: filter,
           },
@@ -37,17 +31,18 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.store.restaurants = response.data.results.restaurants;
-          this.typesList = response.data.results.types
-        }).catch((error) => {
-          console.warn('La ricerca non ha prodotto risultati', error);
+          this.typesList = response.data.results.types;
+        })
+        .catch((error) => {
+          console.warn("La ricerca non ha prodotto risultati", error);
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
+            icon: "error",
+            title: "Oops...",
             showConfirmButton: false,
             timer: 1500,
-            text: 'La tua ricerca non ha prodotto risultati!',
-            footer: 'Verrai reindirizzato alla home.'
-          })
+            text: "La tua ricerca non ha prodotto risultati!",
+            footer: "Verrai reindirizzato alla home.",
+          });
           setTimeout(() => {
             this.store.restaurants = [];
             this.store.selectedTypes = [];
