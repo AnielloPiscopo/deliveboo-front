@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./pages/HomePage.vue";
 import SingleRestaurantPage from "./pages/SingleRestaurantPage.vue";
 import CartPage from "./pages/CartPage.vue";
+import OrderPage from "./pages/OrderPage.vue";
 
 // todo Importare component page.components
 const router = createRouter({
@@ -10,7 +11,7 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "restaurants",
+      name: "home",
       component: HomePage,
     },
 
@@ -24,6 +25,12 @@ const router = createRouter({
       path: "/cart",
       name: "cart",
       component: CartPage,
+    },
+
+    {
+      path: "/order",
+      name: "order",
+      component: OrderPage,
     },
   ],
 });
