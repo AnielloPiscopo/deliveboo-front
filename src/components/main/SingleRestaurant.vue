@@ -41,7 +41,7 @@ export default {
         <div class="col-10">
           <h1>{{ restaurant.name }}</h1>
           <p>{{ restaurant.address }}</p>
-          <router-link :to="{ name: 'restaurants' }" class="btn btn-secondary">Torna alla home</router-link>
+          <router-link :to="{ name: 'home' }" class="btn btn-secondary">Torna alla home</router-link>
         </div>
       </section>
     </div>
