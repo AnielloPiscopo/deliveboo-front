@@ -13,7 +13,7 @@ export default {
                 costumerPhone: '',
                 costumerMail: '',
                 costumerAddress: '',
-                status: 'Ordine annullato.',
+                status: '',
             },
         }
     },
@@ -33,7 +33,7 @@ export default {
                 instance.requestPaymentMethod(function (err, payload) {
                     if (err) {
                         console.log(err);
-                        self.formInfo.status = 'Ordine annullato.';
+                        self.formInfo.status = 'Ordine annullato';
                         axios.post(`${self.store.apiUrl}orders`, {
                             costumer_name: self.formInfo.costumerName,
                             costumer_phone: self.formInfo.costumerPhone,
@@ -46,7 +46,7 @@ export default {
 
                     } else if (payload) {
                         console.log(payload);
-                        self.formInfo.status = 'Ordine effettuato.';
+                        self.formInfo.status = 'Ordine effettuato';
                         axios.post(`${self.store.apiUrl}orders`, {
                             costumer_name: self.formInfo.costumerName,
                             costumer_phone: self.formInfo.costumerPhone,
@@ -71,7 +71,7 @@ export default {
                                 console.log(error);
                             });
                     } else {
-                        self.formInfo.status = 'Ordine annullato.'
+                        self.formInfo.status = 'Ordine annullato'
                     }
                     //console.log(this);
                     // Submit payload.nonce to your server
