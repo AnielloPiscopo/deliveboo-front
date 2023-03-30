@@ -58,9 +58,9 @@ export default {
     </button>
     <router-link
       :to="{ name: 'cart' }"
-      class="button button-header h-100 d-flex align-items-center justify-content-center position-relative"
+      class="button button-header h-100 d-flex align-items-center justify-content-center position-relative bg-white border-0"
     >
-      <font-awesome-icon icon="fa-solid fa-cart-shopping" class="my_icon" />
+      <font-awesome-icon icon="fa-solid fa-cart-shopping" class="my_icon me-1" />
       <span>{{ getQuantity() }}</span>
     </router-link>
   </nav>
