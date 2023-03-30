@@ -23,7 +23,7 @@ export default {
                     <div class="d-none d-lg-flex col-lg-6">
                         <img class="bags img-fluid" :src="store.getFilePath('imgs', 'grocery', 'jpg')" alt="Grocery image">
                     </div>
-                    <div class="col-sm-md-12 col-lg-6">
+                    <div class="col-sm-md-12 d-lg-flex col-lg-6">
                         <img class="ham img-fluid" :src="store.getFilePath('imgs', 'burger', 'jpg')" alt="Burger image">
                     </div>
                 </div>
@@ -50,6 +50,7 @@ export default {
 
 section.jumbo {
     background-color: black;
+    height: 480px;
 }
 
 div.text {
@@ -63,6 +64,13 @@ div.text {
 
 .text-delivebooColor {
     color: #00ccbc;
+}
+
+
+@media (max-width: 768px) {
+    section.jumbo {
+    height: auto;
+}
 }
 
 </style>
