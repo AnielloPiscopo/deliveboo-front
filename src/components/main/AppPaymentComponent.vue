@@ -39,7 +39,7 @@ export default {
                             costumer_phone: self.formInfo.costumerPhone,
                             costumer_mail: self.formInfo.costumerMail,
                             costumer_address: self.formInfo.costumerAddress,
-                            total_price: 0,
+                            total_price: self.store.totalPrice().toFixed(2),
                             status: self.formInfo.status,
                             dishes: self.store.cart,
                         })
@@ -56,15 +56,16 @@ export default {
                             status: self.formInfo.status,
                             dishes: self.store.cart,
                         })
-                            // self.store.cart = [];
-                            // localStorage.clear();
-                            // // setTimeout(() => {
-                            // //     self.$router.push({
-                            // //         name: 'home',
-                            // //     })
-                            // // }, 1500)
+
                             .then(function (response) {
                                 console.log(response.data);
+                                self.store.cart = [];
+                                localStorage.clear();
+                                setTimeout(() => {
+                                    self.$router.push({
+                                        name: 'home',
+                                    })
+                                }, 1500)
                             })
                             .catch(function (error) {
                                 console.log(error);
