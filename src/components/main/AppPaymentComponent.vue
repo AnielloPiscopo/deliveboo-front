@@ -1,5 +1,6 @@
 <script>
 import { store } from "../../store";
+import axios from "axios";
 //import braintree from "braintree";
 export default {
     name: 'AppPaymentComponent',
@@ -22,7 +23,8 @@ export default {
     methods: {
         sendOrder() {
             if (this.isOrderPaid) {
-                axios.post(this.store.apiUrl + 'orders', {
+                console.log(`${this.store.apiUrl}/orders`)
+                axios.post(`${this.store.apiUrl}/orders`, {
                     date: this.formInfo.date,
                     costumer_name: this.formInfo.costumerName,
                     costumer_phone: this.formInfo.costumerPhone,
@@ -32,6 +34,7 @@ export default {
                     status: 'Ordine effettuato con successo.',
                 })
                     .then(function (response) {
+                        console.log(response.data)
                         this.store.cart = [];
                         localStorage.clear();
                         setTimeout(() => {
@@ -97,14 +100,11 @@ export default {
     <section class="container">
         <div class="row">
             <div class="col-6">
-                <form class="g-3 mt-3">
-                    <h3>
-                        Inserisci le tue credenziali
-                    </h3>
+                <form class="g-3 mt-3" @submit.prevent="sendOrder()">
+                    <h3> Inserisci le tue credenziali </h3>
                     <div class="col-md-12">
                         <label for="name-input" class="form-label">Nome</label>
                         <input type="text" class="form-control" id="name-input" v-model="formInfo.name">
-
                     </div>
                     <div class="col-md-12">
                         <label for="mail-input" class="form-label">Mail</label>
@@ -120,17 +120,18 @@ export default {
                         <label for="address-input" class="form-label">Indirizzo</label>
                         <input type="text" class="form-control" id="address-input" v-model="formInfo.costumerAddress">
                     </div>
-
                 </form>
             </div>
-            <div class="col-6">
+            <div class="col-6 mt-3">
+                <h3>Totale da pagare: <span>{{ store.totalPrice().toFixed(2) }}&euro;</span></h3>
                 <div id="dropin-container"></div>
+                <button id="payment">Paga</button>
             </div>
         </div>
         <div class="row">
             <div class="col-12 text-center">
                 <div class="col-12 mt-3">
-                    <button id="payment" class="btn btn-success" type="submit">Paga</button>
+                    <button class="btn btn-success" type="submit">Ordina</button>
                 </div>
             </div>
         </div>

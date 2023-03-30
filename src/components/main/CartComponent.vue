@@ -44,10 +44,16 @@ export default {
         <h1>Carrello</h1>
       </div>
       <div class="col-2">
-        <font-awesome-icon :icon="['fas', 'trash']" class="cursor-pointer" @click="clearCart" />
+        <font-awesome-icon v-show="this.store.cart.length > 1" :icon="['fas', 'trash']" class="cursor-pointer"
+          @click="clearCart" />
       </div>
     </div>
-    <div class="row" v-for="(item, index) in store.cart" :key="index">
+    <div class="row" v-if="this.store.cart.length <= 0">
+      <div class="col-12">
+        <p>Il carrello è vuoto.</p>
+      </div>
+    </div>
+    <div class="row" v-else v-for="(item, index) in store.cart" :key="index">
       <div class="col-3">
         <img class="img-fluid" :src="store.imgControl(item.img_path)" alt="" />
       </div>
@@ -67,7 +73,8 @@ export default {
       <div class="col-12">{{ this.store.totalPrice() }}&euro;</div>
     </div>
   </div>
-  <router-link :to="{ name: 'order' }" class="btn btn-secondary">Ordina e paga</router-link>
+  <router-link v-show="this.store.cart.length > 0" :to="{ name: 'order' }" class="btn btn-secondary">Ordina e
+    paga</router-link>
 </template>
 
 <style lang="scss" scoped></style>
