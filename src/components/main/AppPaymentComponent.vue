@@ -15,64 +15,6 @@ export default {
                 costumerAddress: '',
                 status: 'Ordine annullato.',
             },
-            isOrderPaid: false,
-        }
-    },
-
-    methods: {
-        // sendOrder() {
-        //     if (this.isOrderPaid) {
-        //         console.log(`${this.store.apiUrl}/orders`)
-        //         axios.post(`${this.store.apiUrl}/orders`, {
-        //             costumer_name: this.formInfo.costumerName,
-        //             costumer_phone: this.formInfo.costumerPhone,
-        //             costumer_mail: this.formInfo.costumerMail,
-        //             costumer_address: this.formInfo.costumerAddress,
-        //             total_price: this.store.totalPrice().toFixed(2),
-        //             status: 'Ordine effettuato con successo.',
-        //         })
-        //             .then(function (response) {
-        //                 console.log(response.data)
-        //                 this.store.cart = [];
-        //                 localStorage.clear();
-        //                 setTimeout(() => {
-        //                     this.$router.push({
-        //                         name: 'home',
-        //                     })
-        //                 }, 1500);
-        //                 console.log(response);
-        //             })
-        //             .catch(function (error) {
-        //                 console.log(error);
-        //             });
-        //     }
-        // },
-        sendO() {
-            let button = document.querySelector('#payment');
-
-            braintree.dropin.create({
-                authorization: 'sandbox_ndb53r7c_tx7vjzj53khw2y5d',
-                selector: '#dropin-container'
-            }, function (err, instance) {
-                if (err) {
-                    console.log(err);
-                }
-                button.addEventListener('click', function () {
-                    instance.requestPaymentMethod((err, payload) => {
-                        if (err) {
-                            console.log(err);
-                        } else if (payload) {
-                            console.log(payload);
-                        } else {
-                            this.formInfo.status = 'Ordine annullato.'
-                        }
-                        //console.log(this);
-                        // Submit payload.nonce to your server
-                        //console.log(err, payload)
-
-                    });
-                })
-            });
         }
     },
 
@@ -91,7 +33,17 @@ export default {
                 instance.requestPaymentMethod(function (err, payload) {
                     if (err) {
                         console.log(err);
-                        self.formInfo.status = 'Errore nel pagamento.';
+                        self.formInfo.status = 'Ordine annullato.';
+                        axios.post(`${self.store.apiUrl}orders`, {
+                            costumer_name: self.formInfo.costumerName,
+                            costumer_phone: self.formInfo.costumerPhone,
+                            costumer_mail: self.formInfo.costumerMail,
+                            costumer_address: self.formInfo.costumerAddress,
+                            total_price: 0,
+                            status: self.formInfo.status,
+                            dishes: self.store.cart,
+                        })
+
                     } else if (payload) {
                         console.log(payload);
                         self.formInfo.status = 'Ordine effettuato.';
@@ -102,17 +54,17 @@ export default {
                             costumer_address: self.formInfo.costumerAddress,
                             total_price: self.store.totalPrice().toFixed(2),
                             status: self.formInfo.status,
+                            dishes: self.store.cart,
                         })
+                            // self.store.cart = [];
+                            // localStorage.clear();
+                            // // setTimeout(() => {
+                            // //     self.$router.push({
+                            // //         name: 'home',
+                            // //     })
+                            // // }, 1500)
                             .then(function (response) {
-                                console.log(response.data)
-                                self.store.cart = [];
-                                localStorage.clear();
-                                setTimeout(() => {
-                                    self.$router.push({
-                                        name: 'home',
-                                    })
-                                }, 1500);
-                                console.log(response);
+                                console.log(response.data);
                             })
                             .catch(function (error) {
                                 console.log(error);
