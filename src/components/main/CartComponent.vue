@@ -34,11 +34,6 @@ export default {
     },
   },
 
-  computed: {
-    totalPrice() {
-      return this.store.cart.reduce((a, b) => a + b.price * b.quantity, 0);
-    },
-  },
 };
 </script>
 
@@ -49,11 +44,7 @@ export default {
         <h1>Carrello</h1>
       </div>
       <div class="col-2">
-        <font-awesome-icon
-          :icon="['fas', 'trash']"
-          class="cursor-pointer"
-          @click="clearCart"
-        />
+        <font-awesome-icon :icon="['fas', 'trash']" class="cursor-pointer" @click="clearCart" />
       </div>
     </div>
     <div class="row" v-for="(item, index) in store.cart" :key="index">
@@ -72,10 +63,11 @@ export default {
       <div class="col-12">{{}}</div>
       <div class="col-3">{{ item.price * item.quantity }}&euro;</div>
     </div>
-    <div class="row" v-if="totalPrice != 0">
-      <div class="col-12">{{ totalPrice }}&euro;</div>
+    <div class="row" v-if="this.store.totalPrice() != 0">
+      <div class="col-12">{{ this.store.totalPrice() }}&euro;</div>
     </div>
   </div>
+  <router-link :to="{ name: 'order' }" class="btn btn-secondary">Ordina e paga</router-link>
 </template>
 
 <style lang="scss" scoped></style>
