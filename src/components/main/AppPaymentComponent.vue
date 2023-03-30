@@ -9,7 +9,6 @@ export default {
             store,
             formInfo: {
                 totalPrice: 0,
-                date: '',
                 costumerName: '',
                 costumerPhone: '',
                 costumerMail: '',
@@ -21,65 +20,95 @@ export default {
     },
 
     methods: {
-        sendOrder() {
-            if (this.isOrderPaid) {
-                console.log(`${this.store.apiUrl}/orders`)
-                axios.post(`${this.store.apiUrl}/orders`, {
-                    date: this.formInfo.date,
-                    costumer_name: this.formInfo.costumerName,
-                    costumer_phone: this.formInfo.costumerPhone,
-                    costumer_mail: this.formInfo.costumerMail,
-                    costumer_address: this.formInfo.costumerAddress,
-                    total_price: this.store.totalPrice().toFixed(2),
-                    status: 'Ordine effettuato con successo.',
-                })
-                    .then(function (response) {
-                        console.log(response.data)
-                        this.store.cart = [];
-                        localStorage.clear();
-                        setTimeout(() => {
-                            this.$router.push({
-                                name: 'home',
-                            })
-                        }, 1500);
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
+        // sendOrder() {
+        //     if (this.isOrderPaid) {
+        //         console.log(`${this.store.apiUrl}/orders`)
+        //         axios.post(`${this.store.apiUrl}/orders`, {
+        //             costumer_name: this.formInfo.costumerName,
+        //             costumer_phone: this.formInfo.costumerPhone,
+        //             costumer_mail: this.formInfo.costumerMail,
+        //             costumer_address: this.formInfo.costumerAddress,
+        //             total_price: this.store.totalPrice().toFixed(2),
+        //             status: 'Ordine effettuato con successo.',
+        //         })
+        //             .then(function (response) {
+        //                 console.log(response.data)
+        //                 this.store.cart = [];
+        //                 localStorage.clear();
+        //                 setTimeout(() => {
+        //                     this.$router.push({
+        //                         name: 'home',
+        //                     })
+        //                 }, 1500);
+        //                 console.log(response);
+        //             })
+        //             .catch(function (error) {
+        //                 console.log(error);
+        //             });
+        //     }
+        // },
+        sendO() {
+            let button = document.querySelector('#payment');
+
+            braintree.dropin.create({
+                authorization: 'sandbox_ndb53r7c_tx7vjzj53khw2y5d',
+                selector: '#dropin-container'
+            }, function (err, instance) {
+                if (err) {
+                    console.log(err);
+                }
+                button.addEventListener('click', function () {
+                    instance.requestPaymentMethod((err, payload) => {
+                        if (err) {
+                            console.log(err);
+                        } else if (payload) {
+                            console.log(payload);
+                        } else {
+                            this.formInfo.status = 'Ordine annullato.'
+                        }
+                        //console.log(this);
+                        // Submit payload.nonce to your server
+                        //console.log(err, payload)
+
                     });
-            }
+                })
+            });
         }
     },
 
     mounted() {
+        let self = this;
         let button = document.querySelector('#payment');
 
         braintree.dropin.create({
             authorization: 'sandbox_ndb53r7c_tx7vjzj53khw2y5d',
             selector: '#dropin-container'
         }, function (err, instance) {
+            if (err) {
+                console.log(err);
+            }
             button.addEventListener('click', function () {
-                instance.requestPaymentMethod((err, payload) => {
-                    //console.log(this);
-                    // Submit payload.nonce to your server
-                    //console.log(err, payload)
-                    if (payload) {
-                        this.isOrderPaid = true;
-                    } else {
-                        axios.post(this.store.apiUrl + 'orders', {
-                            date: this.formInfo.date,
-                            costumer_name: this.formInfo.costumerName,
-                            costumer_phone: this.formInfo.costumerPhone,
-                            costumer_mail: this.formInfo.costumerMail,
-                            costumer_address: this.formInfo.costumerAddress,
-                            total_price: this.store.totalPrice().toFixed(2),
-                            status: this.formInfo.status,
+                instance.requestPaymentMethod(function (err, payload) {
+                    if (err) {
+                        console.log(err);
+                        self.formInfo.status = 'Errore nel pagamento.';
+                    } else if (payload) {
+                        console.log(payload);
+                        self.formInfo.status = 'Ordine effettuato.';
+                        axios.post(`${self.store.apiUrl}orders`, {
+                            costumer_name: self.formInfo.costumerName,
+                            costumer_phone: self.formInfo.costumerPhone,
+                            costumer_mail: self.formInfo.costumerMail,
+                            costumer_address: self.formInfo.costumerAddress,
+                            total_price: self.store.totalPrice().toFixed(2),
+                            status: self.formInfo.status,
                         })
                             .then(function (response) {
-                                this.store.cart = [];
+                                console.log(response.data)
+                                self.store.cart = [];
                                 localStorage.clear();
                                 setTimeout(() => {
-                                    this.$router.push({
+                                    self.$router.push({
                                         name: 'home',
                                     })
                                 }, 1500);
@@ -88,11 +117,18 @@ export default {
                             .catch(function (error) {
                                 console.log(error);
                             });
+                    } else {
+                        self.formInfo.status = 'Ordine annullato.'
                     }
+                    //console.log(this);
+                    // Submit payload.nonce to your server
+                    //console.log(err, payload)
+
                 });
             })
         });
     },
+
 }
 </script>
 
@@ -100,11 +136,11 @@ export default {
     <section class="container">
         <div class="row">
             <div class="col-6">
-                <form class="g-3 mt-3" @submit.prevent="sendOrder()">
+                <form class="g-3 mt-3">
                     <h3> Inserisci le tue credenziali </h3>
                     <div class="col-md-12">
                         <label for="name-input" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="name-input" v-model="formInfo.name">
+                        <input type="text" class="form-control" id="name-input" v-model="formInfo.costumerName">
                     </div>
                     <div class="col-md-12">
                         <label for="mail-input" class="form-label">Mail</label>
@@ -125,13 +161,12 @@ export default {
             <div class="col-6 mt-3">
                 <h3>Totale da pagare: <span>{{ store.totalPrice().toFixed(2) }}&euro;</span></h3>
                 <div id="dropin-container"></div>
-                <button id="payment">Paga</button>
             </div>
         </div>
         <div class="row">
             <div class="col-12 text-center">
                 <div class="col-12 mt-3">
-                    <button class="btn btn-success" type="submit">Ordina</button>
+                    <button class="btn btn-success" type="submit" id="payment">Ordina</button>
                 </div>
             </div>
         </div>
