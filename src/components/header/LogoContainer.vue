@@ -16,7 +16,7 @@ export default {
   <div class="container-fluid px-lg-5 m-0">
     <div class="row h-100">
       <div class="col-6 logo p-0 h-100">
-        <router-link :to="{ name: 'restaurants' }">
+        <router-link :to="{ name: 'home' }">
           <img class="h-100" :src="store.getFilePath('imgs', 'logo_deliveboo', 'svg')" alt="Deliveboo Logo" />
         </router-link>
       </div>
