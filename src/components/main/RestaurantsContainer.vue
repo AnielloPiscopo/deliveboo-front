@@ -16,11 +16,11 @@ export default {
 </script>
 
 <template>
-  <div class="my_restaurants-container container p-5">
-    <div class="row justify-content-center g-3">
-      <SingleRestaurant v-for="(restaurant, index) in store.restaurants" :key="index" :restaurant="restaurant" />
+  <div class="my_restaurants-container container-fluid">
+    <div class="row g-4">
+        <SingleRestaurant v-for="(restaurant, index) in store.restaurants" :key="index" :restaurant="restaurant" />
+      </div>
     </div>
-  </div>
 </template>
 
 <style lang="scss" scoped></style>
