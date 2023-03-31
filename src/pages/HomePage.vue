@@ -66,7 +66,7 @@ export default {
   
   <AppHero/>
   <AppSlider/>
-  <section id="home" class="container p-5" v-if="store.restaurants.length != 0">
+  <section id="home" class="container" v-if="store.restaurants.length != 0">
     <TypesCuisine :types="typesList" @filtered="getRestaurantsInfo" />
     <RestaurantsContainer />
   </section>
