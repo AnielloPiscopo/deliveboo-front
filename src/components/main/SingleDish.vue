@@ -52,11 +52,13 @@ export default {
           console.log(this.store.cart);
         } else {
           Swal.fire({
-            icon: 'error',
-            title: 'Opss..',
-            showConfirmButton: false,
-            timer: 2000,
-            text: 'Hai già elementi di un altro ristorante nel carrello!',
+            //icon: 'warning',
+            imageUrl: 'https://www.qrcardboard.com/images/cart.gif?v=01',
+            imageWidth: 200,
+            imageHeight: 200,
+            title: 'Prima di acquistare da un altro ristorante svuotare il carrello!',
+            showConfirmButton: true,
+            confirmButtonColor: '#00ccbc',
           })
         }
       } else {
