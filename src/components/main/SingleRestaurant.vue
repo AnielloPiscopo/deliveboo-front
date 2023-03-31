@@ -27,7 +27,7 @@ export default {
 <template>
   
   
-<div class="col-12 col-md-6 col-lg-3 g-4 gap-3 gap-md-2 " v-if="!isShow">
+<div class="col-12 col-md-6 col-lg-3 g-4 gap-3 gap-md-2 flex-grow-1 " v-if="!isShow">
 
   <div class="recipe-card">
     <div id="recipe-card__cover" class="recipe-card__cover">
@@ -77,16 +77,6 @@ export default {
     </div>
 </div>
 
-    
-
-
-
-
-
-
-
-
-  
 
 </template>
 
@@ -240,11 +230,6 @@ export default {
   .recipe-card__duration {
     transform: translatex(0);
   }
-}
-
-
-.col-12:last-child{
-flex-grow: 1;
 }
 
 @media (max-width: 768px) {
