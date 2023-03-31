@@ -70,8 +70,9 @@ export default {
           <div class="card-body">
             <div class="card-top d-flex justify-content-between">
               <h4 class="card-title">Carrello</h4>
-              <a class="clear text-decoration-none"><span v-show="store.cart.length > 1"><font-awesome-icon
-                    :icon="['far', 'trash-can']" /> Rimuovi tutto</span> </a>
+              <a class="clear text-decoration-none" @click="this.clearCart"><span
+                  v-show="store.cart.length > 1"><font-awesome-icon :icon="['far', 'trash-can']" /> Rimuovi tutto</span>
+              </a>
             </div>
             <h5 v-if="this.store.cart.length <= 0" class="card-subtitle pt-3 mt-3 text-muted text-center">Il carrello è
               vuoto </h5>
@@ -122,8 +123,32 @@ export default {
       </div>
     </div>
   </div>
-  <div class="container" v-else>
-    <p>ciao</p>
+  <div v-else>
+    <div class="canvas-top d-flex justify-content-between mb-3">
+      <h3>Riepilogo</h3>
+      <p class="small text-muted">{{ this.store.cart.length }} {{ (this.store.cart.length > 1) ? 'articoli' : 'articolo'
+      }}</p>
+    </div>
+    <div class="canvas-conteiner">
+      <div class="cart-article" v-for="(item, index) in store.cart" :key="index">
+        <div class="d-flex align-items-center">
+          <img class="canvas-img" :src="store.imgControl(item.img_path)" :alt="item.name">
+          <h6 class="canvas-dish_name m-0">{{ item.name }}</h6>
+          <h6 class="canvas-quantity m-0">{{ item.quantity }}</h6>
+          <h6 class="canvas-price m-0">{{ (item.price * item.quantity).toFixed(2) }} &euro;</h6>
+          <font-awesome-icon :icon="['fas', 'xmark']" class="text-end text-danger" @click="removeDish(0)"
+            style="width:70px;" />
+        </div>
+        <hr>
+      </div>
+      <div class="canvas-end text-end mt-3">
+        <p class="text-muted small m-0">Totale</p>
+        <h5 class="fw-bold">{{ this.store.totalPrice().toFixed(2) }}&euro;</h5>
+      </div>
+      <div class="text-center">
+        <router-link class="checkout-btn" :to="{ name: 'cart' }"> Vai al carrello </router-link>
+      </div>
+    </div>
   </div>
 </template >
 
@@ -132,6 +157,31 @@ div.card {
   box-shadow: 10px 15px 23px -9px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   padding: .5rem 2rem;
 }
+
+img.canvas-img {
+  width: 63px;
+  height: 50px;
+}
+
+h6.canvas-dish_name {
+  width: 100px;
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+h6.canvas-quantity {
+  width: 40px;
+  padding-right: 10px;
+  text-align: center;
+
+}
+
+h6.canvas-price {
+  width: 70px;
+  text-align: center;
+  font-weight: bold;
+}
+
 
 h5.quantity {
   text-align: center;
