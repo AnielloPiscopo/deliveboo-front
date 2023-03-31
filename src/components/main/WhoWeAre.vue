@@ -7,12 +7,10 @@ export default {
 <template>
     <section class="container">
         <div class="row">
-            <div class="my_card col-12 col-md-6 col-lg-3">
+            <div class="card col-12 col-md-6 col-lg-3">
                 <img src="../../assets/imgs/Domenico Paolo.jpg" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between p-1 pt-3">
-                    <div class="info fs-4 fst-italic mb-2">
-                        Domenico Paolo Picariello
-                    </div>
+                    <div class="info fs-4 fst-italic mb-2"> Domenico Paolo Picariello </div>
                     <div class="link">
                         <a href="https://github.com/Paolo224">
                             <font-awesome-icon :icon="['fab', 'github']" class="my_icon" />
@@ -23,14 +21,10 @@ export default {
                     </div>
                 </div>
             </div>
-
-
-            <div class="my_card col-12 col-md-6 col-lg-3">
+            <div class="card col-12 col-md-6 col-lg-3">
                 <img src="../../assets/imgs/Aniello.png" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between p-1  pt-3">
-                    <div class="info fs-4 fst-italic mb-2">
-                        Aniello Piscopo
-                    </div>
+                    <div class="info fs-4 fst-italic mb-2"> Aniello Piscopo </div>
                     <div class="link">
                         <a href="https://github.com/AnielloPiscopo">
                             <font-awesome-icon :icon="['fab', 'github']" class="my_icon" />
@@ -41,14 +35,10 @@ export default {
                     </div>
                 </div>
             </div>
-
-
-            <div class="my_card col-12 col-md-6 col-lg-3">
+            <div class="card col-12 col-md-6 col-lg-3">
                 <img src="../../assets/imgs/Riccardo.JPG" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between p-1  pt-3">
-                    <div class="info fs-4 fst-italic mb-2">
-                        Riccardo Nestola
-                    </div>
+                    <div class="info fs-4 fst-italic mb-2"> Riccardo Nestola </div>
                     <div class="link">
                         <a href="https://github.com/RiccardoNestola">
                             <font-awesome-icon :icon="['fab', 'github']" class="my_icon" />
@@ -59,14 +49,10 @@ export default {
                     </div>
                 </div>
             </div>
-
-
-            <div class="my_card col-12 col-md-6 col-lg-3">
+            <div class="card col-12 col-md-6 col-lg-3">
                 <img style="object-position: right;" src="../../assets/imgs/Donato.jpg" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between p-1  pt-3">
-                    <div class="info fs-4 fst-italic mb-2">
-                        Donato Montrone
-                    </div>
+                    <div class="info fs-4 fst-italic mb-2"> Donato Montrone </div>
                     <div class="link">
                         <a href="https://github.com/donatomontrone">
                             <font-awesome-icon :icon="['fab', 'github']" class="my_icon" />
@@ -77,15 +63,15 @@ export default {
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </template>
 
 <style scoped lang="scss">
-div.my_card {
+div.card {
     border: none;
     margin-top: 128px;
+    height: 600px;
 
     a:hover {
         color: #00ccbc;
