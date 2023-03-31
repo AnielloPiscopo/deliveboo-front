@@ -63,7 +63,7 @@ export default {
 </script>
 
 <template>
-  <div class="container-fluid mt-4">
+  <div class="container-fluid my-5 py-5" v-if="!inMenu">
     <div class="row justify-content-center">
       <div class="col-12 col-sm-10 col-md-8">
         <div class="card rounded-4">
@@ -102,7 +102,7 @@ export default {
                 </p>
               </div>
             </div>
-            <hr>
+            <hr v-if="this.store.totalPrice() != 0">
             <div class="card-bottom" v-if="this.store.totalPrice() != 0">
               <div class="d-flex justify-content-end">
                 <div class="title d-flex flex-column align-items-end me-3 justify-content-center">
@@ -121,6 +121,9 @@ export default {
         </div>
       </div>
     </div>
+  </div>
+  <div class="container" v-else>
+    <p>ciao</p>
   </div>
 </template >
 
