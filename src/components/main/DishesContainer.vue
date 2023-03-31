@@ -22,11 +22,11 @@ export default {
 </script>
 
 <template>
-  <div class="my_dishes-container container p-5">
-    <div class="row">
+  <!-- <div class="my_dishes-container container p-5"> -->
+ 
       <SingleDish v-for="(dish, index) in dishes" :dish="dish" :restaurantId="restaurantId" :key="index" />
-    </div>
-  </div>
+    
+ <!--  </div> -->
 </template>
 
 <style lang="scss" scoped></style>

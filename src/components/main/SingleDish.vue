@@ -89,24 +89,87 @@ export default {
 </script>
 
 <template>
-  <article class="card">
-    <img class="card-img-top img-fluid" :src="store.imgControl(dish.img_path)" :alt="dish.img_path" />
-    <div class="card-body">
-      <h5 class="card-title">{{ dish.name }}</h5>
-      <a class="my-btn cursor-pointer btn btn-primary" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al
-        carrello</a>
-    </div>
-  </article>
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrello</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <CartComponent :inMenu="true" />
-    </div>
+
+
+
+<div class="col-12 col-md-6 col-lg-3 g-4 d-flex ">
+
+  <div id="content" class="">
+
+  <!--   <article class="card">
+        <img class="card-img-top img-fluid" :src="store.imgControl(dish.img_path)" :alt="dish.img_path" />
+        <div class="card-body">
+          <h5 class="card-title">{{ dish.name }}</h5>
+          <a class="my-btn cursor-pointer btn btn-primary" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al
+            carrello</a>
+        </div>
+      </article> -->
+
+      <div class="dish-card">
+        <img :src="store.imgControl(dish.img_path)" :alt="dish.img_path">
+        <div class="dishes-name">{{ dish.name }}</div>
+      </div>
+
+
+
+
+
+
+
+  
+      <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrello</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <CartComponent :inMenu="true" />
+        </div>
+      </div>
+
+
   </div>
+
+
+</div>
+
+
+
+
+
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+#content{
+
+    width: 100%;
+    padding: 0;
+    transition: all .3s;
+}
+
+.dish-card {
+
+        width: 100%; 
+        height: 220px;
+        background: white;
+      /*   margin-left: 30px; */
+        /* margin-top: 125px; */
+        border-radius: 20px;
+        box-shadow: 5px 5px 7px lightgrey;
+        text-align: center;
+
+}
+
+
+  img{
+        height: 120px;
+        width: 120px;
+        border-radius: 50%;
+        margin-top: 20px;
+    }
+
+
+
+</style>
