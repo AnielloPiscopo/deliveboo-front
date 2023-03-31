@@ -78,9 +78,11 @@ export default {
       //Altrimenti sweetalert di errore, completa l'ordine precedente;
     },
     showCart() {
-      const offcanvasElement = document.querySelector('#offcanvasScrolling');
-      const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
-      offcanvas.show();
+      if (this.dish.restaurant_id === this.store.cart[0].restaurant_id) {
+        const offcanvasElement = document.querySelector('#offcanvasScrolling');
+        const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+        offcanvas.show();
+      }
     },
   },
 };
