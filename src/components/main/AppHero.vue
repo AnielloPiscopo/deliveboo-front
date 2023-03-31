@@ -72,7 +72,7 @@ div.text {
 
 @media (max-width: 768px) {
     section.jumbo {
-    height: auto;
+    height: 300px;
 }
 }
 
