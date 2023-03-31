@@ -7,7 +7,11 @@ export default {
 <template>
     <section class="container">
         <div class="row">
+<<<<<<< HEAD
             <div class="card col-12 col-md-6 col-lg-3">
+=======
+            <div class="my_card col-12 col-md-6 col-lg-3">
+>>>>>>> feat--WhoWeArePage
                 <img src="../../assets/imgs/Domenico Paolo.jpg" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between p-1 pt-3">
                     <div class="info fs-4 fst-italic mb-2"> Domenico Paolo Picariello </div>
@@ -21,7 +25,13 @@ export default {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="card col-12 col-md-6 col-lg-3">
+=======
+
+
+            <div class="my_card col-12 col-md-6 col-lg-3">
+>>>>>>> feat--WhoWeArePage
                 <img src="../../assets/imgs/Aniello.png" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between p-1  pt-3">
                     <div class="info fs-4 fst-italic mb-2"> Aniello Piscopo </div>
@@ -35,7 +45,13 @@ export default {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="card col-12 col-md-6 col-lg-3">
+=======
+
+
+            <div class="my_card col-12 col-md-6 col-lg-3">
+>>>>>>> feat--WhoWeArePage
                 <img src="../../assets/imgs/Riccardo.JPG" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between p-1  pt-3">
                     <div class="info fs-4 fst-italic mb-2"> Riccardo Nestola </div>
@@ -49,7 +65,13 @@ export default {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="card col-12 col-md-6 col-lg-3">
+=======
+
+
+            <div class="my_card col-12 col-md-6 col-lg-3">
+>>>>>>> feat--WhoWeArePage
                 <img style="object-position: right;" src="../../assets/imgs/Donato.jpg" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between p-1  pt-3">
                     <div class="info fs-4 fst-italic mb-2"> Donato Montrone </div>
@@ -63,12 +85,13 @@ export default {
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 </template>
 
 <style scoped lang="scss">
-div.card {
+div.my_card {
     border: none;
     margin-top: 128px;
     height: 600px;

@@ -51,12 +51,14 @@ export default {
           console.log(this.store.cart);
         } else {
           Swal.fire({
-            icon: "error",
-            title: "Opss..",
-            showConfirmButton: false,
-            timer: 2000,
-            text: "Hai già elementi di un altro ristorante nel carrello!",
-          });
+            //icon: 'warning',
+            imageUrl: 'https://www.qrcardboard.com/images/cart.gif?v=01',
+            imageWidth: 200,
+            imageHeight: 200,
+            title: 'Prima di acquistare da un altro ristorante svuotare il carrello!',
+            showConfirmButton: true,
+            confirmButtonColor: '#00ccbc',
+          })
         }
       } else {
         let quantityDef = 1;
@@ -89,36 +91,18 @@ export default {
 
 <template>
   <article class="card" v-if="dish.is_visible">
-    <img
-      class="card-img-top img-fluid"
-      :src="store.imgControl(dish.img_path)"
-      :alt="dish.img_path"
-    />
+    <img class="card-img-top img-fluid" :src="store.imgControl(dish.img_path)" :alt="dish.img_path" />
     <div class="card-body">
       <h5 class="card-title">{{ dish.name }}</h5>
-      <a
-        class="my-btn cursor-pointer btn btn-primary"
-        @click.passive="addDishtoCart(dish), showCart()"
-        >Aggiungi al carrello</a
-      >
+      <a class="my-btn cursor-pointer btn btn-primary" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al
+        carrello</a>
     </div>
   </article>
-  <div
-    class="offcanvas offcanvas-end"
-    data-bs-scroll="true"
-    data-bs-backdrop="false"
-    tabindex="-1"
-    id="offcanvasScrolling"
-    aria-labelledby="offcanvasScrollingLabel"
-  >
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrello</h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="offcanvas"
-        aria-label="Close"
-      ></button>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <CartComponent :inMenu="true" />
