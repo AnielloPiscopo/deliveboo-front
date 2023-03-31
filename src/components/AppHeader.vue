@@ -12,14 +12,13 @@ export default {
 };
 </script>
 <template>
-  <header :class="this.$route.name === 'restaurants' ? '' : 'bg-light'">
+  <header :class="this.$route.name === 'home' ? '' : 'bg-light'">
     <HeaderLogoContainer />
     <HeaderNavMenu />
   </header>
 </template>
 
 <style lang="scss">
-
 header {
   height: 65px;
   padding: 1rem;
@@ -27,5 +26,4 @@ header {
   display: flex;
   justify-content: space-between;
 }
-
 </style>

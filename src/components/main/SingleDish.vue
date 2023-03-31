@@ -1,10 +1,13 @@
 <script>
-import { handleError } from "vue";
 import Swal from 'sweetalert2'
 import { store } from "../../store";
+import CartComponent from "./CartComponent.vue";
 
 export default {
   name: "SingleDish",
+  components: {
+    CartComponent,
+  },
 
   data() {
     return {
@@ -30,15 +33,7 @@ export default {
   },
 
   methods: {
-    addToCart(product) {
-      console.log(product);
-      this.store.cart.push(product);
-      this.store.cartCount++;
-      this.store.saveCart();
-      console.log(this.restaurantId);
-    },
     addDishtoCart(item) {
-
       if (this.store.cart.length > 0) {
         if (this.dish.restaurant_id === this.store.cart[0].restaurant_id) {
           let quantityDefault = 1;
@@ -82,6 +77,11 @@ export default {
       //salvo il carrello.
       //Altrimenti sweetalert di errore, completa l'ordine precedente;
     },
+    showCart() {
+      const offcanvasElement = document.querySelector('#offcanvasScrolling');
+      const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+      offcanvas.show();
+    },
   },
 };
 </script>
@@ -91,9 +91,20 @@ export default {
     <img class="card-img-top img-fluid" :src="store.imgControl(dish.img_path)" :alt="dish.img_path" />
     <div class="card-body">
       <h5 class="card-title">{{ dish.name }}</h5>
-      <a class="my-btn cursor-pointer btn btn-primary" @click="addDishtoCart(dish)">Aggiungi al carrello</a>
+      <a class="my-btn cursor-pointer btn btn-primary" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al
+        carrello</a>
     </div>
   </article>
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrello</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <CartComponent :inMenu="true" />
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>
