@@ -7,8 +7,14 @@ export default {
   data() {
     return {
       store,
-      areMoreThanOne: false,
-    };
+
+    }
+  },
+
+  props: {
+    inMenu: {
+      type: Boolean,
+    },
   },
 
   methods: {
@@ -73,8 +79,10 @@ export default {
       <div class="col-12">{{ this.store.totalPrice() }}&euro;</div>
     </div>
   </div>
-  <router-link v-show="this.store.cart.length > 0" :to="{ name: 'order' }" class="btn btn-secondary">Ordina e
-    paga</router-link>
+  <router-link v-if="!inMenu" v-show="this.store.cart.length > 0" :to="{ name: 'order' }" class="btn btn-secondary">Ordina
+    e paga</router-link>
+  <router-link v-else v-show="this.store.cart.length > 0" :to="{ name: 'cart' }" class="btn btn-secondary">Vai al
+    carrello</router-link>
 </template>
 
 <style lang="scss" scoped></style>
