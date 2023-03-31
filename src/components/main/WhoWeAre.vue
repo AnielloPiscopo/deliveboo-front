@@ -69,7 +69,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-div.my_card {
+div.card {
     border: none;
     margin-top: 128px;
     height: 600px;
