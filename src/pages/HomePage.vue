@@ -33,25 +33,12 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          console.log(response.data.success);
           this.store.restaurants = response.data.results.restaurants;
           this.typesList = response.data.results.types;
         })
         .catch((error) => {
-          console.warn("La ricerca non ha prodotto risultati", error);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            showConfirmButton: false,
-            timer: 1500,
-            text: "La tua ricerca non ha prodotto risultati!",
-            footer: "Verrai reindirizzato alla home.",
-          });
-          setTimeout(() => {
-            this.store.restaurants = [];
-            this.store.selectedTypes = [];
-            this.getRestaurantsInfo();
-          }, 1500);
+          console.log(error)
         });
     },
   },
@@ -63,9 +50,8 @@ export default {
 </script>
 
 <template>
-  
-  <AppHero/>
-  <AppSlider/>
+  <AppHero />
+  <AppSlider />
   <section id="home" class="container" v-if="store.restaurants.length != 0">
     <TypesCuisine :types="typesList" @filtered="getRestaurantsInfo" />
     <RestaurantsContainer />

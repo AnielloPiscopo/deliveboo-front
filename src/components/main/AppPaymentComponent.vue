@@ -1,6 +1,7 @@
 <script>
 import { store } from "../../store";
 import axios from "axios";
+import Swal from "sweetalert2";
 //import braintree from "braintree";
 export default {
     name: 'AppPaymentComponent',
@@ -33,20 +34,44 @@ export default {
                 instance.requestPaymentMethod(function (err, payload) {
                     if (err) {
                         console.log(err);
-                        self.formInfo.status = 'Ordine annullato';
+                        self.formInfo.status = 'Ordine annullato.';
                         axios.post(`${self.store.apiUrl}orders`, {
                             costumer_name: self.formInfo.costumerName,
                             costumer_phone: self.formInfo.costumerPhone,
                             costumer_mail: self.formInfo.costumerMail,
                             costumer_address: self.formInfo.costumerAddress,
-                            total_price: self.store.totalPrice().toFixed(2),
+                            total_price: 0,
                             status: self.formInfo.status,
                             dishes: self.store.cart,
                         })
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Ordine annullato",
+                            text: 'E\' stato riscontrato un errore in fase di pagamento, ricontrolla i dati inseriti.',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        });
 
                     } else if (payload) {
                         console.log(payload);
-                        self.formInfo.status = 'Ordine effettuato';
+                        self.formInfo.status = 'Ordine effettuato.';
+                        setTimeout(() => {
+                            Swal.fire({
+                                title: 'Ordine Confermato!',
+                                text: 'Il tuo ordine è in fase di preparazione, appena sarà pronto effettueremo la consegna.',
+                                imageUrl: 'https://media2.giphy.com/media/gsr9MG7bDvSRWWSD1Y/giphy.gif?cid=6c09b952c297bb251d3ad1e67e1ec6e813c5aa24e97de8c1&rid=giphy.gif&ct=s',
+                                imageWidth: 400,
+                                imageHeight: 400,
+                                imageAlt: 'Deliveboo',
+                                showConfirmButton: false,
+                                timer: 4000,
+                            })
+                        }, 500);
+                        setTimeout(() => {
+                            self.$router.push({ name: 'home' })
+                            self.store.cart = [];
+                            localStorage.clear();
+                        }, 4500);
                         axios.post(`${self.store.apiUrl}orders`, {
                             costumer_name: self.formInfo.costumerName,
                             costumer_phone: self.formInfo.costumerPhone,
@@ -56,25 +81,16 @@ export default {
                             status: self.formInfo.status,
                             dishes: self.store.cart,
                         })
-
                             .then(function (response) {
                                 console.log(response.data);
-                                self.store.cart = [];
-                                localStorage.clear();
-                                setTimeout(() => {
-                                    self.$router.push({
-                                        name: 'home',
-                                    })
-                                }, 1500)
                             })
                             .catch(function (error) {
                                 console.log(error);
                             });
                     } else {
-                        self.formInfo.status = 'Ordine annullato'
+                        self.formInfo.status = 'Ordine annullato.'
                     }
                     //console.log(this);
-                    // Submit payload.nonce to your server
                     //console.log(err, payload)
 
                 });

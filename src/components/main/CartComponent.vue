@@ -1,5 +1,6 @@
 <script>
 import { store } from "../../store";
+import Swal from "sweetalert2";
 
 export default {
   name: "CartComponent",
@@ -35,8 +36,26 @@ export default {
     },
 
     clearCart() {
-      localStorage.clear();
-      this.store.cart = [];
+      Swal.fire({
+        title: 'Sei sicuro?',
+        text: "Questa azione eliminerà tutti gli articoli dal tuo carrello!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#a5a5a5',
+        confirmButtonText: 'Elimina articoli',
+        cancelButtonText: 'Annulla'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.clear();
+          this.store.cart = [];
+          Swal.fire(
+            'Cancellato!',
+            'Tutti i prodotti del carrello sono stati eliminati.',
+            'success'
+          )
+        }
+      })
     },
   },
 
