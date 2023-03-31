@@ -95,7 +95,6 @@ export default {
 
 .recipe-card {
   border-radius: 15px;
-  /* display: flex; */
 }
 .recipe-card__cover {
   cursor: pointer;
@@ -103,9 +102,7 @@ export default {
   border-radius: 15px;
   position: relative;
   height: 500px;
-  /* width: 300px; */
   display: flex;
-  /* flex-direction: column; */
   overflow: hidden;
   z-index: 30;
   transition: transform 0.3s ease-in-out, border-radius 0.3s ease-in-out;
@@ -232,7 +229,6 @@ export default {
   }
   .recipe-card__cover {
     height: 50vh;
-    /* width: 100vw; */
     border-radius: 0;
     box-shadow: none;
   }
