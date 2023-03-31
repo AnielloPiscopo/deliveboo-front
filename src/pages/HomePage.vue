@@ -6,6 +6,7 @@ import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
 import TypesCuisine from "../components/main/TypesCuisine.vue";
 import AppHero from "../components/main/AppHero.vue";
 import AppSlider from "../components/main/AppSlider.vue";
+import NotFound from "../components/main/NotFound.vue";
 
 export default {
   name: "RestaurantsPage",
@@ -14,13 +15,15 @@ export default {
     RestaurantsContainer,
     TypesCuisine,
     AppHero,
-    AppSlider
+    AppSlider,
+    NotFound
   },
 
   data() {
     return {
       store,
       typesList: [],
+      filterSearch: true,
     };
   },
 
@@ -33,9 +36,14 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data.success);
-          this.store.restaurants = response.data.results.restaurants;
-          this.typesList = response.data.results.types;
+          console.log(response.data);
+          if (response.data.success) {
+            this.filterSearch = true;
+            this.store.restaurants = response.data.results.restaurants;
+            this.typesList = response.data.results.types;
+          } else {
+            this.filterSearch = false;
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -54,7 +62,8 @@ export default {
   <AppSlider />
   <section id="home" class="container" v-if="store.restaurants.length != 0">
     <TypesCuisine :types="typesList" @filtered="getRestaurantsInfo" />
-    <RestaurantsContainer />
+    <RestaurantsContainer v-if="filterSearch" />
+    <NotFound v-else />
   </section>
 </template>
 
