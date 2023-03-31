@@ -94,14 +94,16 @@ export default {
     <img class="card-img-top img-fluid" :src="store.imgControl(dish.img_path)" :alt="dish.img_path" />
     <div class="card-body">
       <h5 class="card-title">{{ dish.name }}</h5>
-      <a class="my-btn cursor-pointer btn btn-primary" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al
+      <a class="my-btn cursor-pointer btn btn-primary d-none d-md-inline-block"
+        @click.passive="addDishtoCart(dish), showCart()">Aggiungi al carrello</a>
+      <a class="my-btn cursor-pointer btn btn-primary d-md-none" @click.passive="addDishtoCart(dish)">Aggiungi al
         carrello</a>
     </div>
   </article>
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrello</h5>
+      <h2 class="offcanvas-title" id="offcanvasScrollingLabel">Carrello</h2>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
