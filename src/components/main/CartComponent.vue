@@ -73,10 +73,10 @@ export default {
         <button @click="removeDish(0)">Rimuovi</button>
       </div>
       <div class="col-12">{{}}</div>
-      <div class="col-3">{{ item.price * item.quantity }}&euro;</div>
+      <div class="col-3">{{ (item.price * item.quantity).toFixed(2) }}&euro;</div>
     </div>
     <div class="row" v-if="this.store.totalPrice() != 0">
-      <div class="col-12">{{ this.store.totalPrice() }}&euro;</div>
+      <div class="col-12">{{ this.store.totalPrice().toFixed(2) }}&euro;</div>
     </div>
   </div>
   <router-link v-if="!inMenu" v-show="this.store.cart.length > 0" :to="{ name: 'order' }" class="btn btn-secondary">Ordina
