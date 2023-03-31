@@ -1,5 +1,5 @@
 <script>
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { store } from "../../store";
 import CartComponent from "./CartComponent.vue";
 
@@ -37,34 +37,33 @@ export default {
       if (this.store.cart.length > 0) {
         if (this.dish.restaurant_id === this.store.cart[0].restaurant_id) {
           let quantityDefault = 1;
-          let found = this.store.cart.find(i => i.id === item.id);
+          let found = this.store.cart.find((i) => i.id === item.id);
           // const found = array1.find(element => element > 10);
           if (found) {
             found.quantity++;
           } else {
             this.store.cart.push({
               ...item,
-              quantity: quantityDefault
+              quantity: quantityDefault,
             });
             this.store.saveCart();
-
           }
           console.log(this.store.cart);
         } else {
           Swal.fire({
-            icon: 'error',
-            title: 'Opss..',
+            icon: "error",
+            title: "Opss..",
             showConfirmButton: false,
             timer: 2000,
-            text: 'Hai già elementi di un altro ristorante nel carrello!',
-          })
+            text: "Hai già elementi di un altro ristorante nel carrello!",
+          });
         }
       } else {
         let quantityDef = 1;
         this.store.cart.push({
           ...item,
-          quantity: quantityDef
-        })
+          quantity: quantityDef,
+        });
         this.store.saveCart();
       }
       // Se dish.restaurant_id = restaurant.id
@@ -79,7 +78,7 @@ export default {
     },
     showCart() {
       if (this.dish.restaurant_id === this.store.cart[0].restaurant_id) {
-        const offcanvasElement = document.querySelector('#offcanvasScrolling');
+        const offcanvasElement = document.querySelector("#offcanvasScrolling");
         const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
         offcanvas.show();
       }
@@ -89,19 +88,37 @@ export default {
 </script>
 
 <template>
-  <article class="card">
-    <img class="card-img-top img-fluid" :src="store.imgControl(dish.img_path)" :alt="dish.img_path" />
+  <article class="card" v-if="dish.is_visible">
+    <img
+      class="card-img-top img-fluid"
+      :src="store.imgControl(dish.img_path)"
+      :alt="dish.img_path"
+    />
     <div class="card-body">
       <h5 class="card-title">{{ dish.name }}</h5>
-      <a class="my-btn cursor-pointer btn btn-primary" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al
-        carrello</a>
+      <a
+        class="my-btn cursor-pointer btn btn-primary"
+        @click.passive="addDishtoCart(dish), showCart()"
+        >Aggiungi al carrello</a
+      >
     </div>
   </article>
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div
+    class="offcanvas offcanvas-end"
+    data-bs-scroll="true"
+    data-bs-backdrop="false"
+    tabindex="-1"
+    id="offcanvasScrolling"
+    aria-labelledby="offcanvasScrollingLabel"
+  >
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrello</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
     </div>
     <div class="offcanvas-body">
       <CartComponent :inMenu="true" />
