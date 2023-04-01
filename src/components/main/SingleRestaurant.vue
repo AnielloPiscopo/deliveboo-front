@@ -25,6 +25,7 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="col-12 col-md-6 col-lg-3 g-4 gap-3 gap-md-2 flex-grow-1 " v-if="!isShow">
     <div class="recipe-card">
       <div id="recipe-card__cover" class="recipe-card__cover">
@@ -41,11 +42,33 @@ export default {
               <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="btn mt-2">Visualizza
                 menù</router-link>
             </div>
+=======
+  
+  
+<div class="col-12 col-md-6 col-lg-3 g-4 gap-3 gap-md-2 flex-grow-1" v-if="!isShow">
+
+  <div class="recipe-card">
+    <div id="recipe-card__cover" class="recipe-card__cover">
+      <div class="recipe-card__img">
+        <img :src="store.imgControl(restaurant.img_path)">
+      </div>
+      <div class="recipe-card__cover-details">
+        <div id="recipe-card__info" class="recipe-card__info">
+          <div class="recipe-card__title">
+            <h2 class="" >{{ restaurant.name }}</h2>
+            <p class="p-0 pe-2 fst-italic fs-6 pb-5">{{ restaurant.address }}</p>
+          </div>
+          <div class="recipe-card__description">
+            
+            <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="btn mt-2">Visualizza
+            menù</router-link>
+>>>>>>> feat-single-page-restaurant-layout
           </div>
         </div>
       </div>
     </div>
   </div>
+<<<<<<< HEAD
   <div class="col-12" v-else>
     <div class="recipe-card">
       <div id="recipe-card__cover" class="recipe-card__cover rounded-0">
@@ -70,6 +93,37 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+=======
+
+</div>
+
+<div class="col-12" v-else>
+  <div class="cover position-relative">
+    <img :src="store.imgControl(restaurant.img_path)" class="hero-img">
+    <div class="cover__content position-absolute">
+      <h1>{{ restaurant.name }}</h1>
+      <p>{{ restaurant.address }}</p>
+    </div>
+  </div>
+</div>
+
+</template>
+
+<style lang="scss" scoped>
+
+.hero-img{
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+    filter: brightness(.6);
+}
+
+.cover__content{
+  top: 200px;
+  left: 20px;
+  color: white;
+}
+>>>>>>> feat-single-page-restaurant-layout
 .recipe-card {
   border-radius: 15px;
 }
