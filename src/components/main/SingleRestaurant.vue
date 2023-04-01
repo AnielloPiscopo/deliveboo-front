@@ -12,7 +12,7 @@ export default {
   props: {
     restaurant: {
       type: Object,
-      required: false,
+      required: true,
     },
 
     isShow: {
@@ -25,19 +25,21 @@ export default {
 </script>
 
 <template>
-  <div class="col-12 col-md-6 col-lg-3 g-4 gap-3 gap-md-2 flex-grow-1 " v-if="!isShow">
+  <div class="col-12 col-md-6 col-lg-3 g-4 gap-3 gap-md-2 flex-grow-1" v-if="!isShow">
+
     <div class="recipe-card">
-      <div id="recipe-card_cover" class="recipe-card_cover">
+      <div id="recipe-card__cover" class="recipe-card__cover">
         <div class="recipe-card__img">
           <img :src="store.imgControl(restaurant.img_path)">
         </div>
         <div class="recipe-card__cover-details">
-          <div id="recipe-card_info" class="recipe-card_info">
+          <div id="recipe-card__info" class="recipe-card__info">
             <div class="recipe-card__title">
               <h2 class="">{{ restaurant.name }}</h2>
               <p class="p-0 pe-2 fst-italic fs-6 pb-5">{{ restaurant.address }}</p>
             </div>
             <div class="recipe-card__description">
+
               <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="btn mt-2">Visualizza
                 menù</router-link>
             </div>
@@ -45,31 +47,34 @@ export default {
         </div>
       </div>
     </div>
+
   </div>
+
   <div class="col-12" v-else>
-    <div class="recipe-card">
-      <div id="recipe-card_cover" class="recipe-card_cover rounded-0">
-        <div class="recipe-card__img">
-          <img :src="store.imgControl(restaurant.img_path)">
-        </div>
-        <div class="recipe-card__cover-details">
-          <div id="recipe-card_info" class="recipe-card_info">
-            <div class="recipe-card__title">
-              <h2 class="">{{ restaurant.name }}</h2>
-              <p class="p-0 pe-2 fst-italic fs-6 pb-5">{{ restaurant.address }}</p>
-            </div>
-            <div class="recipe-card__description">
-              <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="btn">Visualizza
-                menù</router-link>
-            </div>
-          </div>
-        </div>
+    <div class="cover position-relative">
+      <img :src="store.imgControl(restaurant.img_path)" class="hero-img">
+      <div class="cover__content position-absolute">
+        <h1>{{ restaurant.name }}</h1>
+        <p>{{ restaurant.address }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.hero-img {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  filter: brightness(.6);
+}
+
+.cover__content {
+  top: 200px;
+  left: 20px;
+  color: white;
+}
+
 .recipe-card {
   border-radius: 15px;
 }
@@ -117,13 +122,13 @@ export default {
   transform: translateX(-80%);
 }
 
-.recipe-card_cover:hover .recipe-card_img img {
+.recipe-card__cover:hover .recipe-card__img img {
   transform: scale(1.1);
   filter: brightness(0.5);
 }
 
 .recipe-card__cover:hover,
-.recipe-card_cover:hover .recipe-card_duration {
+.recipe-card__cover:hover .recipe-card__duration {
   transform: translatex(0);
 }
 
@@ -144,7 +149,7 @@ export default {
   transform: translateY(45%);
 }
 
-.recipe-card_cover:hover .recipe-card_info {
+.recipe-card__cover:hover .recipe-card__info {
   transform: translateY(3%);
   bottom: 20px;
 }
@@ -247,5 +252,4 @@ export default {
     bottom: 10px;
   }
 
-}
-</style>
+}</style>
