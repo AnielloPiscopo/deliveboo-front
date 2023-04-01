@@ -6,6 +6,8 @@ import RestaurantsContainer from "../components/main/RestaurantsContainer.vue";
 import TypesCuisine from "../components/main/TypesCuisine.vue";
 import AppHero from "../components/main/AppHero.vue";
 import AppSlider from "../components/main/AppSlider.vue";
+import NotFound from "../components/main/NotFound.vue";
+import SectionImage from "../components/main/SectionImage.vue";
 
 export default {
   name: "RestaurantsPage",
@@ -14,13 +16,16 @@ export default {
     RestaurantsContainer,
     TypesCuisine,
     AppHero,
-    AppSlider
+    AppSlider,
+    NotFound,
+    SectionImage
   },
 
   data() {
     return {
       store,
       typesList: [],
+      filterSearch: true,
     };
   },
 
@@ -34,24 +39,16 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.store.restaurants = response.data.results.restaurants;
-          this.typesList = response.data.results.types;
+          if (response.data.success) {
+            this.filterSearch = true;
+            this.store.restaurants = response.data.results.restaurants;
+            this.typesList = response.data.results.types;
+          } else {
+            this.filterSearch = false;
+          }
         })
         .catch((error) => {
-          console.warn("La ricerca non ha prodotto risultati", error);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            showConfirmButton: false,
-            timer: 1500,
-            text: "La tua ricerca non ha prodotto risultati!",
-            footer: "Verrai reindirizzato alla home.",
-          });
-          setTimeout(() => {
-            this.store.restaurants = [];
-            this.store.selectedTypes = [];
-            this.getRestaurantsInfo();
-          }, 1500);
+          console.log(error)
         });
     },
   },
@@ -63,12 +60,13 @@ export default {
 </script>
 
 <template>
-  
-  <AppHero/>
-  <AppSlider/>
-  <section id="home" class="container p-5" v-if="store.restaurants.length != 0">
+  <AppHero />
+  <AppSlider />
+  <section id="home" class="container" v-if="store.restaurants.length != 0">
+    <SectionImage />
     <TypesCuisine :types="typesList" @filtered="getRestaurantsInfo" />
-    <RestaurantsContainer />
+    <RestaurantsContainer v-if="filterSearch" />
+    <NotFound v-else :message="'ristorante'" />
   </section>
 </template>
 
