@@ -52,20 +52,15 @@ export default {
 
 <template>
   <section id="single-restaurant">
-
-      <SingleRestaurant :restaurant="restaurant" :isShow="true" />
-
-      <div class="container d-md-flex align-items-stretch">
-        <div class="row pt-4">
-          <AppCategories :categories="categories" />
-        </div>
-        <div class="row pt-4">
-          <DishesContainer :dishes="dishes" :restaurantId="restaurant.id" />
-        </div>
-          
-        
+    <SingleRestaurant :restaurant="restaurant" :isShow="true" />
+    <div class="container d-md-flex align-items-stretch">
+      <div class="row pt-4">
+        <AppCategories :categories="categories" :dishes="dishes" />
       </div>
-
+      <div class="row pt-4">
+        <DishesContainer :dishes="dishes" :restaurantId="restaurant.id" />
+      </div>
+    </div>
   </section>
 </template>
 
