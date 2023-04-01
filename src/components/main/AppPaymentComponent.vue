@@ -223,7 +223,7 @@ export default {
               class="form-control"
               id="address-input"
               v-model="formInfo.costumerAddress"
-              maxlength="255"
+              maxlength="255" required
             />
           </div>
         </form>
