@@ -66,7 +66,7 @@ export default {
     <SectionImage />
     <TypesCuisine :types="typesList" @filtered="getRestaurantsInfo" />
     <RestaurantsContainer v-if="filterSearch" />
-    <NotFound v-else />
+    <NotFound v-else :message="'ristorante'" />
   </section>
 </template>
 
