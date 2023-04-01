@@ -63,45 +63,195 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-10">
-        <h1>Carrello</h1>
-      </div>
-      <div class="col-2">
-        <font-awesome-icon v-show="this.store.cart.length > 1" :icon="['fas', 'trash']" class="cursor-pointer"
-          @click="clearCart" />
-      </div>
-    </div>
-    <div class="row" v-if="this.store.cart.length <= 0">
-      <div class="col-12">
-        <p>Il carrello è vuoto.</p>
-      </div>
-    </div>
-    <div class="row" v-else v-for="(item, index) in store.cart" :key="index">
-      <div class="col-3">
-        <img class="img-fluid" :src="store.imgControl(item.img_path)" alt="" />
-      </div>
-      <div class="col-6">
-        <span>{{ item.name }}</span>
-        <div>
-          <button @click="decreaseQuantity(item)">-</button>
-          <span>{{ item.quantity }}</span>
-          <button @click="addQuantity(item)">+</button>
+  <div class="container-fluid my-5 py-5" v-if="!inMenu">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8">
+        <div class="card rounded-4">
+          <div class="card-body">
+            <div class="card-top d-flex justify-content-between">
+              <h4 class="card-title pb-3">Carrello</h4>
+              <a class="clear text-decoration-none" @click="this.clearCart"><span
+                  v-show="store.cart.length > 1"><font-awesome-icon :icon="['far', 'trash-can']" /> Rimuovi tutto</span>
+              </a>
+            </div>
+            <h5 v-if="this.store.cart.length <= 0" class="card-subtitle pt-3 mt-3 text-muted text-center">Il carrello è
+              vuoto </h5>
+            <div v-else class="container-fluid"></div>
+            <div v-for="(item, index) in store.cart" :key="index" class="cart-content row mb-3">
+              <div class="col-12 col-md-3 col-lg-2 text-center">
+                <img class="img-size rounded-2" :src="store.imgControl(item.img_path)" :alt="item.name" />
+              </div>
+              <div class="col-12 col-md-6 col-lg-7 d-flex pt-3 pt-md-0 justify-content-between">
+                <div class="left-part d-flex flex-column justify-content-center">
+                  <h3 class="m-0">{{ item.name }}</h3>
+                  <p class="text-muted single-price">{{ item.price.toFixed(2) }} &euro;</p>
+                </div>
+                <div class="right-part d-flex align-items-lg-center">
+                  <div class="bottons d-flex gap-1">
+                    <font-awesome-icon :icon="['fas', 'circle-minus']" size="xl" class="" style="color: #00ccbc;"
+                      @click="decreaseQuantity(item)" />
+                    <h5 class="quantity">{{ item.quantity }}</h5>
+                    <font-awesome-icon :icon="['fas', 'circle-plus']" size="xl" style="color: #00ccbc;"
+                      @click="addQuantity(item)" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3 d-flex flex-column justify-content-center text-end">
+                <h5 class="m-0">{{ (item.price * item.quantity).toFixed(2) }} &euro; </h5>
+                <p>
+                  <a class="clear text-decoration-none" @click="removeDish(0)"> Rimuovi </a>
+                </p>
+              </div>
+            </div>
+            <hr v-if="this.store.totalPrice() != 0">
+            <div class="card-bottom" v-if="this.store.totalPrice() != 0">
+              <div class="d-flex justify-content-end">
+                <div class="title d-flex flex-column align-items-end me-3 justify-content-center">
+                  <p class=" m-0">Totale</p>
+                  <p class="small text-muted">{{ this.store.cart.length }} {{ (this.store.cart.length > 1) ? 'articoli' :
+                    'articolo' }}</p>
+                </div>
+                <h4 class="total-price">{{ this.store.totalPrice().toFixed(2) }}&euro;</h4>
+              </div>
+              <div class="text-end pt-3">
+                <router-link class="checkout-btn" v-show="this.store.cart.length > 0" :to="{ name: 'order' }"> Ordina
+                </router-link>
+              </div>
+            </div>
+          </div>
         </div>
-        <button @click="removeDish(0)">Rimuovi</button>
       </div>
-      <div class="col-12">{{}}</div>
-      <div class="col-3">{{ (item.price * item.quantity).toFixed(2) }}&euro;</div>
-    </div>
-    <div class="row" v-if="this.store.totalPrice() != 0">
-      <div class="col-12">{{ this.store.totalPrice().toFixed(2) }}&euro;</div>
     </div>
   </div>
-  <router-link v-if="!inMenu" v-show="this.store.cart.length > 0" :to="{ name: 'order' }" class="btn btn-secondary">Ordina
-    e paga</router-link>
-  <router-link v-else v-show="this.store.cart.length > 0" :to="{ name: 'cart' }" class="btn btn-secondary">Vai al
-    carrello</router-link>
-</template>
+  <div v-else>
+    <div class="canvas-top d-flex justify-content-between mb-3">
+      <h3>Riepilogo</h3>
+      <p class="small text-muted">{{ this.store.cart.length }} {{ (this.store.cart.length > 1) ? 'articoli' : 'articolo'
+      }}</p>
+    </div>
+    <div class="canvas-conteiner">
+      <div class="cart-article" v-for="(item, index) in store.cart" :key="index">
+        <div class="d-flex align-items-center">
+          <img class="canvas-img" :src="store.imgControl(item.img_path)" :alt="item.name">
+          <h6 class="canvas-dish_name m-0 text-truncate">{{ item.name }}</h6>
+          <h6 class="canvas-quantity m-0">{{ item.quantity }}</h6>
+          <h6 class="canvas-price m-0">{{ (item.price * item.quantity).toFixed(2) }} &euro;</h6>
+          <font-awesome-icon :icon="['fas', 'xmark']" class="text-end text-danger" @click="removeDish(0)"
+            style="width:70px;" />
+        </div>
+        <hr>
+      </div>
+      <div class="canvas-end text-end mt-3">
+        <p class="text-muted small m-0">Totale</p>
+        <h5 class="fw-bold">{{ this.store.totalPrice().toFixed(2) }}&euro;</h5>
+      </div>
+      <div class="text-center">
+        <router-link class="checkout-btn" :to="{ name: 'cart' }"> Vai al carrello </router-link>
+      </div>
+    </div>
+  </div>
+</template >
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.img-size {
+  width: 100px;
+  height: 80px;
+}
+
+div.card {
+  box-shadow: 10px 15px 23px -9px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  padding: .5rem 2rem;
+}
+
+img.canvas-img {
+  width: 63px;
+  height: 50px;
+}
+
+h6.canvas-dish_name {
+  width: 100px;
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+h6.canvas-quantity {
+  width: 40px;
+  padding-right: 10px;
+  text-align: center;
+
+}
+
+h6.canvas-price {
+  width: 70px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+h5.quantity {
+  text-align: center;
+  width: 30px;
+}
+
+a.clear {
+  color: red;
+  font-size: .8rem;
+  cursor: pointer;
+
+  &:hover {
+    color: darkred;
+  }
+}
+
+h4.total-price {
+  line-height: 45px;
+}
+
+.checkout-btn {
+  position: relative;
+  font-size: 17px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: .8em 2.5em;
+  display: inline-block;
+  border-radius: 6em;
+  transition: all .2s;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  color: white;
+  background-color: #00ccbc;
+}
+
+.checkout-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.checkout-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.checkout-btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+
+.checkout-btn::after {
+  background-color: #00ccbc;
+}
+
+.checkout-btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+</style>
