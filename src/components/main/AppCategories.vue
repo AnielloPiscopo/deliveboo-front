@@ -23,7 +23,7 @@ export default {
     
 
         <nav id="sidebar">
-            <div class="p-2 pt-3">
+            <div class="p-2 mt-4">
                     <h4 class="pb-3">Categorie</h4>
                 <ul class="list-unstyled components" v-for="(category) in categories">
                     <li><h6>{{ category.title }}</h6></li>

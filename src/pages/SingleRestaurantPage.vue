@@ -59,7 +59,7 @@ export default {
         <div class="row pt-4">
           <AppCategories :categories="categories" />
         </div>
-        <div class="row">
+        <div class="row pt-4">
           <DishesContainer :dishes="dishes" :restaurantId="restaurant.id" />
         </div>
           

@@ -23,7 +23,7 @@ export default {
 
 <template>
   <!-- <div class="my_dishes-container container p-5"> -->
- 
+      <h1 class="mt-4">Il nostro menu</h1>
       <SingleDish v-for="(dish, index) in dishes" :dish="dish" :restaurantId="restaurantId" :key="index" />
     
  <!--  </div> -->
