@@ -109,8 +109,7 @@ export default {
                     <h5>Riepilogo Ordine:</h5>
                     <div class="dish" v-for="item in store.cart">
                         <div class="d-flex justify-content-between">
-                            <p class="w-75 m-0"><span class="fw-bold">{{ item.quantity }}</span> x {{ item.name }} <span
-                                    class="italic">{{ item.category.name }}</span></p>
+                            <p class="w-75 m-0"><span class="fw-bold">{{ item.quantity }}</span> x {{ item.name }}</p>
                             <p class="w-25 text-end m-0 fw-bold">{{ (item.price * item.quantity).toFixed(2) }} &euro;</p>
                         </div>
                         <hr>
