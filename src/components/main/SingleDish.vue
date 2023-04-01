@@ -82,7 +82,9 @@ export default {
       if (this.dish.restaurant_id === this.store.cart[0].restaurant_id) {
         const offcanvasElement = document.querySelector("#offcanvasScrolling");
         const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
-        offcanvas.show();
+        if (this.store.cart.length > 0) {
+          offcanvas.show();
+        }
       }
     },
   },
