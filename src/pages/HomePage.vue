@@ -7,6 +7,7 @@ import TypesCuisine from "../components/main/TypesCuisine.vue";
 import AppHero from "../components/main/AppHero.vue";
 import AppSlider from "../components/main/AppSlider.vue";
 import NotFound from "../components/main/NotFound.vue";
+import SectionImage from "../components/main/SectionImage.vue";
 
 export default {
   name: "RestaurantsPage",
@@ -16,7 +17,8 @@ export default {
     TypesCuisine,
     AppHero,
     AppSlider,
-    NotFound
+    NotFound,
+    SectionImage
   },
 
   data() {
@@ -61,6 +63,7 @@ export default {
   <AppHero />
   <AppSlider />
   <section id="home" class="container" v-if="store.restaurants.length != 0">
+    <SectionImage />
     <TypesCuisine :types="typesList" @filtered="getRestaurantsInfo" />
     <RestaurantsContainer v-if="filterSearch" />
     <NotFound v-else />
