@@ -14,7 +14,7 @@ export default {
                 </h2>
                 <p class="mb-4 ">
                     Ricevi il tuo cibo preferito in un lampo. Vedrai quando il tuo rider ha ritirato il tuo ordine e potrai
-                    seguirlo lungo il percorso. Riceverai una notifica anche quando sono nelle vicinanze.
+                    seguirlo lungo il percorso. Riceverai una notifica quando sarà nelle vicinanze.
                 </p>
                 <div class=" d-flex">
                     <svg class="me-2" id="livetype" xmlns="http://www.w3.org/2000/svg" width="119.66407" height="40"
