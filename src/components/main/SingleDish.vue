@@ -92,28 +92,26 @@ export default {
 </script>
 
 <template>
-  <div class="col-12 col-md-6 col-lg-6 col-xl-3 g-4 d-flex ">
+  <div class="col-12 col-lg-4 col-xl-3 g-4 d-flex" v-if="dish.is_visible">
     <div id="content" class="">
-      <!--   <article class="card">
-              <img class="card-img-top img-fluid" :src="store.imgControl(dish.img_path)" :alt="dish.img_path" />
-              <div class="card-body">
-                <h5 class="card-title">{{ dish.name }}</h5>
-                <a class="my-btn cursor-pointer btn btn-primary" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al
-                  carrello</a>
-              </div>
-            </article> -->
       <div class="dish-card">
         <img :src="store.imgControl(dish.img_path)" :alt="dish.img_path">
         <h6 class="dishes-name p-3 fw-bold">{{ dish.name }}</h6>
         <div>
           <p class="dishes-desc px-3">{{ dish.description }}</p>
         </div>
+        <h6 class="fw-bold">
+          Ingredienti:
+        </h6>
+        <div>
+          <p class="dishes-desc px-3 fst-italic">{{ dish.ingredients }}</p>
+        </div>
         <div>
           <p class="dishes-price px-3 fw-bold">{{ dish.price.toFixed(2) }}&euro; </p>
         </div>
         <div>
           <a class="cursor-pointer btn" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al carrello</a>
-          <!-- <a class="cursor-pointer btn d-md-none" @click.passive="addDishtoCart(dish)">Aggiungi al carrello</a> -->
+          <a class="cursor-pointer btn d-md-none" @click.passive="addDishtoCart(dish)">Aggiungi al carrello</a>
         </div>
       </div>
       <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
@@ -128,11 +126,33 @@ export default {
       </div>
     </div>
   </div>
+  <div class="col-12 col-lg-4 col-xl-3 g-4 d-flex" v-else>
+    <div id="content" class="">
+      <div class="dish-card my_disabled">
+        <img :src="store.imgControl(dish.img_path)" :alt="dish.img_path" class="my_disabled">
+        <h6 class="dishes-name p-3 fw-bold my_disabled">{{ dish.name }}</h6>
+        <div>
+          <p class="dishes-desc px-3 my_disabled">{{ dish.description }}</p>
+        </div>
+        <h6 class="fw-bold my_disabled">
+          Ingredienti:
+        </h6>
+        <div>
+          <p class="dishes-desc px-3 fst-italic my_disabled">{{ dish.ingredients }}</p>
+        </div>
+        <div>
+          <p class="dishes-price px-3 fw-bold my_disabled">{{ dish.price.toFixed(2) }}&euro; </p>
+        </div>
+        <div>
+          <button disabled class="cursor-pointer btn my_disabled">ESAURITO</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 #content {
-
   width: 100%;
   padding: 0;
   transition: all .3s;
@@ -141,7 +161,7 @@ export default {
 .dish-card {
 
   width: 100%;
-  height: 380px;
+  height: 600px;
   background: white;
   /*   margin-left: 30px; */
   /* margin-top: 125px; */
@@ -154,8 +174,7 @@ export default {
 
 
 .dishes-price {
-  position: absolute;
-  position: absolute;
+  //position: absolute;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -230,26 +249,31 @@ img {
   opacity: 0;
 }
 
+.my_disabled {
+  color: rgb(84, 84, 84);
+  filter: grayscale(1);
+  background-color: lightgray;
+}
 
 @media (max-width: 768px) {
   .dish-card {
-    height: 360px;
+    height: 500px;
   }
 
   .btn {
     padding: 8px;
   }
 
-  /* .dishes-price{
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-    top: 70%;
-    padding-top: 19px;
-} */
+  // .dishes-price {
+  //   position: absolute;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  //   left: 0;
+  //   right: 0;
+  //   text-align: center;
+  //   top: 70%;
+  //   padding-top: 19px;
+  // }
 
 
 
@@ -258,13 +282,8 @@ img {
 
 
 @media (min-width: 1119px) {
-
   .btn {
     padding: 5px;
-
   }
-
-
-
 }
 </style>
