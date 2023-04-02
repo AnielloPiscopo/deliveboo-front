@@ -40,7 +40,7 @@ export default {
                             costumer_phone: self.formInfo.costumerPhone,
                             costumer_mail: self.formInfo.costumerMail,
                             costumer_address: self.formInfo.costumerAddress,
-                            total_price: 0,
+                            total_price: self.formInfo.totalPrice.toFixed(2),
                             status: self.formInfo.status,
                             dishes: self.store.cart,
                         })
