@@ -88,10 +88,10 @@ export default {
                 </div>
                 <div class="right-part d-flex align-items-lg-center">
                   <div class="bottons d-flex gap-1">
-                    <font-awesome-icon :icon="['fas', 'circle-minus']" size="xl" class="" style="color: #00ccbc;"
-                      @click="decreaseQuantity(item)" />
+                    <font-awesome-icon :icon="['fas', 'circle-minus']" size="xl" class=""
+                      style="color: #00ccbc; cursor: pointer;" @click="decreaseQuantity(item)" />
                     <h5 class="quantity">{{ item.quantity }}</h5>
-                    <font-awesome-icon :icon="['fas', 'circle-plus']" size="xl" style="color: #00ccbc;"
+                    <font-awesome-icon :icon="['fas', 'circle-plus']" size="xl" style="color: #00ccbc; cursor: pointer;"
                       @click="addQuantity(item)" />
                   </div>
                 </div>
