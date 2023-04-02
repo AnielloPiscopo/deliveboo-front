@@ -18,7 +18,6 @@ export default {
             },
         }
     },
-
     mounted() {
         let self = this;
         let button = document.querySelector('#payment');
@@ -96,8 +95,7 @@ export default {
                 });
             })
         });
-    },
-
+    }
 }
 </script>
 
@@ -127,26 +125,26 @@ export default {
                 </div>
                 <form class="g-3 form-control grey-border pb-5 p-3">
                     <div class="col-lg-11 col-xl-9 col-xxl-8">
-                        <label for="name-input" class="form-label small">Nome</label>
+                        <label for="name-input" class="form-label small">Nome completo</label>
                         <input type="text" class="form-control grey-border form-control-lg border-readius-none"
-                            id="name-input" v-model="formInfo.costumerName">
+                            id="name-input" v-model.trim="formInfo.costumerName">
                     </div>
                     <div class="col-lg-11 col-xl-9 col-xxl-8">
                         <label for="mail-input" class="form-label small">Mail</label>
                         <div class="input-group">
                             <input type="mail" class="form-control grey-border form-control-lg border-readius-none"
-                                id="mail-input" v-model="formInfo.costumerMail">
+                                id="mail-input" v-model.trim="formInfo.costumerMail">
                         </div>
                     </div>
                     <div class="col-lg-11 col-xl-9 col-xxl-8">
                         <label for="phone-input" class="form-label small">Numero di telefono</label>
-                        <input type="text" class="form-control grey-border form-control-lg border-readius-none"
-                            id="phone-input" v-model="formInfo.costumerPhone">
+                        <input type="tel" class="form-control grey-border form-control-lg border-readius-none"
+                            id="phone-input" v-model.trim="formInfo.costumerPhone">
                     </div>
                     <div class="col-lg-11 col-xl-9 col-xxl-8">
                         <label for="address-input" class="form-label small">Indirizzo</label>
                         <input type="text" class="form-control grey-border form-control-lg border-readius-none"
-                            id="address-input" v-model="formInfo.costumerAddress">
+                            id="address-input" v-model.trim="formInfo.costumerAddress">
                     </div>
                 </form>
                 <div id="dropin-container"></div>
@@ -155,7 +153,9 @@ export default {
         <div class="row">
             <div class="col-12 text-center">
                 <div class="col-12 mt-3">
-                    <button class="checkout-btn" type="submit" id="payment">Ordine e paga</button>
+                    <button class="checkout-btn" type="submit" id="payment"
+                        :disabled="(formInfo.costumerName.trim() === '' || formInfo.costumerAddress.trim() === '' || formInfo.costumerPhone.trim() === '' || formInfo.costumerMail.trim() === '')">Ordine
+                        e paga</button>
                 </div>
             </div>
         </div>
@@ -210,6 +210,11 @@ form {
 .checkout-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+button.checkout-btn:disabled {
+    border: 1px solid grey;
+    background-color: lightgray;
 }
 
 .checkout-btn:active {
