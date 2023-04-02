@@ -20,6 +20,7 @@
     "braintree-web": "^2.32.1",
     "luxon": "^3.3.0",
     "sweetalert2": "^11.7.3",
+    "vee-validate": "^4.8.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
