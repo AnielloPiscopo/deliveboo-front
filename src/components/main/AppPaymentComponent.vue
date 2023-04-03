@@ -113,8 +113,8 @@ export default {
             <hr>
           </div>
           <div class="total text-end">
-            <p class="m-0 fw-bold"> <span class="fw-normal pe-1 text-muted small">Totale</span>{{ store.totalPrice() }}
-              &euro; </p>
+            <p class="m-0 fw-bold"> <span class="fw-normal pe-1 text-muted small">Totale</span>{{
+              store.totalPrice().toFixed(2) }} &euro; </p>
           </div>
         </div>
       </div>
