@@ -35,7 +35,7 @@ const router = createRouter({
     },
 
     {
-      path: "/whoWeAre",
+      path: "/who-we-are",
       name: "whoWeAre",
       component: WhoWeArePage,
     },
