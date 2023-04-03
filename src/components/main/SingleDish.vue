@@ -260,6 +260,7 @@ img {
   color: rgb(84, 84, 84);
   filter: grayscale(1);
   background-color: lightgray;
+  box-shadow: none;
 }
 
 @media (max-width: 768px) {
