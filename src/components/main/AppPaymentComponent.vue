@@ -53,7 +53,7 @@ export default {
 
           } else if (payload) {
             console.log(payload);
-            self.formInfo.status = 'Ordine effettuato.';
+            self.formInfo.status = 'Ordine effettuato';
             setTimeout(() => {
               Swal.fire({
                 title: 'Ordine Confermato!',
@@ -87,7 +87,7 @@ export default {
                 console.log(error);
               });
           } else {
-            self.formInfo.status = 'Ordine annullato.'
+            self.formInfo.status = 'Ordine annullato'
           }
           //console.log(this);
           //console.log(err, payload)
