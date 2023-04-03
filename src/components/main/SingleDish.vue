@@ -92,7 +92,7 @@ export default {
 </script>
 
 <template>
-  <div class="col-12 col-lg-4 col-xl-3 g-4 d-flex" v-if="dish.is_visible">
+  <div class="col-12 col-md-6 col-lg-6 col-xl-3 g-4 d-flex" v-if="dish.is_visible">
     <div id="content" class="">
       <div class="dish-card">
         <img :src="store.imgControl(dish.img_path)" :alt="dish.img_path">
@@ -104,12 +104,12 @@ export default {
           Ingredienti:
         </h6>
         <div>
-          <p class="dishes-desc px-3 fst-italic">{{ dish.ingredients }}</p>
+          <p class="dishes-ingr px-3 fst-italic">{{ dish.ingredients }}</p>
         </div>
         <div>
           <p class="dishes-price px-3 fw-bold">{{ dish.price.toFixed(2) }}&euro; </p>
         </div>
-        <div>
+        <div class="p-0">
           <a class="cursor-pointer btn" @click.passive="addDishtoCart(dish), showCart()">Aggiungi al carrello</a>
           <a class="cursor-pointer btn d-md-none" @click.passive="addDishtoCart(dish)">Aggiungi al carrello</a>
         </div>
@@ -126,7 +126,7 @@ export default {
       </div>
     </div>
   </div>
-  <div class="col-12 col-lg-4 col-xl-3 g-4 d-flex" v-else>
+  <div class="col-12 col-md-6 col-lg-6 col-xl-3 g-4 d-flex" v-else>
     <div id="content" class="">
       <div class="dish-card my_disabled">
         <img :src="store.imgControl(dish.img_path)" :alt="dish.img_path" class="my_disabled">
@@ -138,7 +138,7 @@ export default {
           Ingredienti:
         </h6>
         <div>
-          <p class="dishes-desc px-3 fst-italic my_disabled">{{ dish.ingredients }}</p>
+          <p class="dishes-ingr px-3 fst-italic my_disabled">{{ dish.ingredients }}</p>
         </div>
         <div>
           <p class="dishes-price px-3 fw-bold my_disabled">{{ dish.price.toFixed(2) }}&euro; </p>
@@ -152,6 +152,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 #content {
   width: 100%;
   padding: 0;
@@ -172,15 +173,21 @@ export default {
 
 }
 
+.dishes-desc{
+  height: 120px;
+  overflow-y: auto;
+
+}
+
 
 .dishes-price {
-  //position: absolute;
+  position: absolute;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
   text-align: center;
-  top: 70%;
+  top: 80%;
   padding-top: 19px;
   font-size: 20px;
 }
@@ -264,18 +271,14 @@ img {
     padding: 8px;
   }
 
-  // .dishes-price {
-  //   position: absolute;
-  //   margin-left: auto;
-  //   margin-right: auto;
-  //   left: 0;
-  //   right: 0;
-  //   text-align: center;
-  //   top: 70%;
-  //   padding-top: 19px;
-  // }
+   .dishes-price {
+     top: 75%;
+   }
 
-
+.dishes-desc {
+  height: 80px;
+  overflow-y: auto;
+}
 
 
 }
