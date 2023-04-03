@@ -14,13 +14,25 @@ export default {
           </h4>
           <ul class="p-0">
             <li>Investitori</li>
-            <li>Chi siamo</li>
-            <li>Ristoranti</li>
+            <router-link :to="{ name: 'whoWeAre' }">
+              <li>
+                Chi siamo
+              </li>
+            </router-link>
+            <li>
+              <a href="#">
+                Ristoranti
+              </a>
+            </li>
             <li>Altro</li>
             <li>Pressroom</li>
             <li>Programmazione</li>
             <li>Design</li>
-            <li>Lavora con noi</li>
+            <li>
+              <a href="http://127.0.0.1:8000/register">
+                Lavora con noi
+              </a>
+            </li>
             <li>Diventa nostro partner</li>
           </ul>
         </div>
@@ -41,7 +53,11 @@ export default {
           <ul class="p-0">
             <li>Contatti</li>
             <li>FAQs</li>
-            <li>Tipi di Cucina</li>
+            <li>
+              <a href="#">
+                Tipi di Cucina
+              </a>
+            </li>
           </ul>
         </div>
         <div class="box col-12 col-md-6 col-lg-3">

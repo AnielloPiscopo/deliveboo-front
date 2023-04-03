@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage.vue";
 import SingleRestaurantPage from "./pages/SingleRestaurantPage.vue";
 import CartPage from "./pages/CartPage.vue";
 import OrderPage from "./pages/OrderPage.vue";
+import WhoWeArePage from "./pages/WhoWeArePage.vue";
 
 // todo Importare component page.components
 const router = createRouter({
@@ -31,6 +32,12 @@ const router = createRouter({
       path: "/order",
       name: "order",
       component: OrderPage,
+    },
+
+    {
+      path: "/who-we-are",
+      name: "whoWeAre",
+      component: WhoWeArePage,
     },
   ],
 });
