@@ -92,7 +92,7 @@ export default {
 </script>
 
 <template>
-  <div class="col-12 col-md-6 col-lg-6 col-xl-3 g-4 d-flex" v-if="dish.is_visible">
+  <div class="col-12 col-md-6 col-lg-6 col-xl-3 g-4 d-flex flex-xl-grow-1" v-if="dish.is_visible">
     <div id="content" class="">
       <div class="dish-card">
         <img :src="store.imgControl(dish.img_path)" :alt="dish.img_path">
@@ -126,7 +126,7 @@ export default {
       </div>
     </div>
   </div>
-  <div class="col-12 col-md-6 col-lg-6 col-xl-3 g-4 d-flex" v-else>
+  <div class="col-12 col-md-6 col-lg-6 col-xl-3 g-4 d-flex flex-xl-grow-1" v-else>
     <div id="content" class="">
       <div class="dish-card my_disabled">
         <img :src="store.imgControl(dish.img_path)" :alt="dish.img_path" class="my_disabled">

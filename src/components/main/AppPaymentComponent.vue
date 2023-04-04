@@ -204,7 +204,7 @@ export default {
                 type="mail"
                 class="form-control grey-border form-control-lg border-readius-none"
                 id="mail-input"
-                v-model.trim="formInfo.costumerPhone"
+                v-model.trim="formInfo.costumerMail"
                 required
                 minlength="3"
                 maxlength="100"
